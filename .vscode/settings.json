@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "cmaster.h": "c",
+        "stdlib.h": "c",
+        "ws2812.h": "c",
+        "time.h": "c",
+        "stdio.h": "c",
+        "cstdlib": "c",
+        "ctr.h": "c"
+    },
+    "ros.distro": "foxy"
+}

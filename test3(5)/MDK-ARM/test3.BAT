@@ -1,0 +1,32 @@
+SET PATH=C:\Keil_v5\ARM\ARMCLANG\Bin;C:\Program Files\PlasticSCM5\server;C:\Program Files\PlasticSCM5\client;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\SoftWare\VM\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Bandizip\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;D:\SoftWare\OPENCV\OpenCV-MinGW-Build-OpenCV-3.4.1-x64\x64\mingw\bin;D:\SoftWare\OPENCV\mingw64\bin;C:\Program Files\CMake\bin;C:\Program Files\Git LFS;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\bin;C:\Users\21945\AppData\Local\Microsoft\WindowsApps;C:\Users\21945\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\21945\AppData\Roaming\npm;C:\ProgramData\21945\gitkraken\bin;C:\Users\21945\AppData\Local\gitkraken\bin;D:\SoftWare\CLion 2023.1.4\bin;
+SET CPU_TYPE=STM32F103RC
+SET CPU_VENDOR=STMicroelectronics
+SET UV2_TARGET=test3
+SET CPU_CLOCK=0x007A1200
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\startup_stm32f103xe._ac"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\main.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\gpio.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\dma.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\tim.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_it.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_msp.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_gpio_ex.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_tim.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_tim_ex.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_rcc.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_rcc_ex.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_gpio.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_dma.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_cortex.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_pwr.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_flash.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_flash_ex.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\stm32f1xx_hal_exti.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\system_stm32f1xx_1.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\ws2812.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\bsp_dwt.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\ctr.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @"test3\vibra.__i"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\ArmLink" --Via "test3\test3.lnp"
+"C:\Keil_v5\ARM\ARMCLANG\Bin\fromelf.exe" "test3\test3.axf" --i32combined --output "test3\test3.hex"

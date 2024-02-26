@@ -1,0 +1,8 @@
+-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c
+-fno-rtti -funsigned-char -fshort-enums -fshort-wchar
+-D__MICROLIB -gdwarf-3 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../BSP -I ../ContrlSys
+-I./RTE/_test3
+-IC:/Users/21945/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include
+-IC:/Users/21945/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.3.0/Device/Include
+-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE
+-o test3/gpio.o -MD "../Core/Src/gpio.c"

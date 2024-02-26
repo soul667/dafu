@@ -1,0 +1,355 @@
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"vibra.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Vibra_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	Vibra_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	Vibra_Init:
+  25              	.LFB65:
+  26              		.file 1 "ContrlSys/vibra.c"
+   1:ContrlSys/vibra.c **** #include "vibra.h"
+   2:ContrlSys/vibra.c **** #include "ctr.h"
+   3:ContrlSys/vibra.c **** #include "gpio.h"
+   4:ContrlSys/vibra.c **** 
+   5:ContrlSys/vibra.c **** int vibra_flag[5];
+   6:ContrlSys/vibra.c **** 
+   7:ContrlSys/vibra.c **** extern EnergySys ES;
+   8:ContrlSys/vibra.c **** 
+   9:ContrlSys/vibra.c **** /*
+  10:ContrlSys/vibra.c **** *按键说明
+  11:ContrlSys/vibra.c **** *VB1-PA4(振动1) VB2-PA6(振动2) VB3-PA5(振动4) VB4-PA7(振动3) VB5-PC4(振动5)
+  12:ContrlSys/vibra.c **** *由于未看硬件原理图，振动和对应标签不一样
+  13:ContrlSys/vibra.c **** *
+  14:ContrlSys/vibra.c **** **/
+  15:ContrlSys/vibra.c **** 
+  16:ContrlSys/vibra.c **** /*
+  17:ContrlSys/vibra.c **** *
+  18:ContrlSys/vibra.c **** *振动传感器信号初始化
+  19:ContrlSys/vibra.c **** *
+  20:ContrlSys/vibra.c **** *
+  21:ContrlSys/vibra.c **** **/
+  22:ContrlSys/vibra.c **** void Vibra_Init(void)
+  23:ContrlSys/vibra.c **** {
+  27              		.loc 1 23 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  24:ContrlSys/vibra.c **** 	vibra_flag[0]=0;
+  32              		.loc 1 24 2 view .LVU1
+  33              		.loc 1 24 15 is_stmt 0 view .LVU2
+  34 0000 034B     		ldr	r3, .L2
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 2
+
+
+  35 0002 0022     		movs	r2, #0
+  36 0004 1A60     		str	r2, [r3]
+  25:ContrlSys/vibra.c **** 	vibra_flag[1]=0;
+  37              		.loc 1 25 2 is_stmt 1 view .LVU3
+  38              		.loc 1 25 15 is_stmt 0 view .LVU4
+  39 0006 5A60     		str	r2, [r3, #4]
+  26:ContrlSys/vibra.c **** 	vibra_flag[2]=0;
+  40              		.loc 1 26 2 is_stmt 1 view .LVU5
+  41              		.loc 1 26 15 is_stmt 0 view .LVU6
+  42 0008 9A60     		str	r2, [r3, #8]
+  27:ContrlSys/vibra.c **** 	vibra_flag[3]=0;
+  43              		.loc 1 27 2 is_stmt 1 view .LVU7
+  44              		.loc 1 27 15 is_stmt 0 view .LVU8
+  45 000a DA60     		str	r2, [r3, #12]
+  28:ContrlSys/vibra.c **** 	vibra_flag[4]=0;
+  46              		.loc 1 28 2 is_stmt 1 view .LVU9
+  47              		.loc 1 28 15 is_stmt 0 view .LVU10
+  48 000c 1A61     		str	r2, [r3, #16]
+  29:ContrlSys/vibra.c **** }
+  49              		.loc 1 29 1 view .LVU11
+  50 000e 7047     		bx	lr
+  51              	.L3:
+  52              		.align	2
+  53              	.L2:
+  54 0010 00000000 		.word	.LANCHOR0
+  55              		.cfi_endproc
+  56              	.LFE65:
+  58              		.section	.text.Vibra_monitor,"ax",%progbits
+  59              		.align	1
+  60              		.global	Vibra_monitor
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	Vibra_monitor:
+  66              	.LFB66:
+  30:ContrlSys/vibra.c **** 
+  31:ContrlSys/vibra.c **** /*
+  32:ContrlSys/vibra.c **** *
+  33:ContrlSys/vibra.c **** *振动传感器检测
+  34:ContrlSys/vibra.c **** *添加了预判条件IF
+  35:ContrlSys/vibra.c **** *
+  36:ContrlSys/vibra.c **** **/
+  37:ContrlSys/vibra.c **** void Vibra_monitor(void)
+  38:ContrlSys/vibra.c **** {
+  67              		.loc 1 38 1 is_stmt 1 view -0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 08B5     		push	{r3, lr}
+  72              	.LCFI0:
+  73              		.cfi_def_cfa_offset 8
+  74              		.cfi_offset 3, -8
+  75              		.cfi_offset 14, -4
+  39:ContrlSys/vibra.c **** 	if(HAL_GPIO_ReadPin(VB1_GPIO_Port,VB1_Pin) == SET){
+  76              		.loc 1 39 2 view .LVU13
+  77              		.loc 1 39 5 is_stmt 0 view .LVU14
+  78 0002 1021     		movs	r1, #16
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 3
+
+
+  79 0004 2548     		ldr	r0, .L16
+  80 0006 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  81              	.LVL0:
+  82              		.loc 1 39 4 view .LVU15
+  83 000a 0128     		cmp	r0, #1
+  84 000c 18D0     		beq	.L11
+  85              	.L5:
+  40:ContrlSys/vibra.c **** 		if(ES.Need_hit==0){
+  41:ContrlSys/vibra.c **** 		vibra_flag[0]=1;
+  42:ContrlSys/vibra.c **** 		}
+  43:ContrlSys/vibra.c **** 	//	vibra_flag[0]=1;
+  44:ContrlSys/vibra.c **** 	}
+  45:ContrlSys/vibra.c **** 	if(HAL_GPIO_ReadPin(VB2_GPIO_Port,VB2_Pin) == SET){
+  86              		.loc 1 45 2 is_stmt 1 view .LVU16
+  87              		.loc 1 45 5 is_stmt 0 view .LVU17
+  88 000e 2021     		movs	r1, #32
+  89 0010 2248     		ldr	r0, .L16
+  90 0012 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  91              	.LVL1:
+  92              		.loc 1 45 4 view .LVU18
+  93 0016 0128     		cmp	r0, #1
+  94 0018 1BD0     		beq	.L12
+  95              	.L6:
+  46:ContrlSys/vibra.c **** 		if(ES.Need_hit==3){
+  47:ContrlSys/vibra.c **** 		vibra_flag[3]=1;
+  48:ContrlSys/vibra.c **** 		}
+  49:ContrlSys/vibra.c **** 	//	vibra_flag[3]=1;
+  50:ContrlSys/vibra.c **** 	}
+  51:ContrlSys/vibra.c **** 	if(HAL_GPIO_ReadPin(VB3_GPIO_Port,VB3_Pin) == SET){
+  96              		.loc 1 51 2 is_stmt 1 view .LVU19
+  97              		.loc 1 51 5 is_stmt 0 view .LVU20
+  98 001a 4021     		movs	r1, #64
+  99 001c 1F48     		ldr	r0, .L16
+ 100 001e FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 101              	.LVL2:
+ 102              		.loc 1 51 4 view .LVU21
+ 103 0022 0128     		cmp	r0, #1
+ 104 0024 1ED0     		beq	.L13
+ 105              	.L7:
+  52:ContrlSys/vibra.c **** 		if(ES.Need_hit==1){
+  53:ContrlSys/vibra.c **** 		vibra_flag[1]=1;
+  54:ContrlSys/vibra.c **** 		}
+  55:ContrlSys/vibra.c **** 	//	vibra_flag[1]=1;
+  56:ContrlSys/vibra.c **** 	}
+  57:ContrlSys/vibra.c **** 	if(HAL_GPIO_ReadPin(VB4_GPIO_Port,VB4_Pin) == SET){
+ 106              		.loc 1 57 2 is_stmt 1 view .LVU22
+ 107              		.loc 1 57 5 is_stmt 0 view .LVU23
+ 108 0026 8021     		movs	r1, #128
+ 109 0028 1C48     		ldr	r0, .L16
+ 110 002a FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 111              	.LVL3:
+ 112              		.loc 1 57 4 view .LVU24
+ 113 002e 0128     		cmp	r0, #1
+ 114 0030 21D0     		beq	.L14
+ 115              	.L8:
+  58:ContrlSys/vibra.c **** 		if(ES.Need_hit==2){
+  59:ContrlSys/vibra.c **** 		vibra_flag[2]=1;
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 4
+
+
+  60:ContrlSys/vibra.c **** 		}
+  61:ContrlSys/vibra.c **** 	//	vibra_flag[2]=1;
+  62:ContrlSys/vibra.c **** 	}
+  63:ContrlSys/vibra.c **** 	if(HAL_GPIO_ReadPin(VB5_GPIO_Port,VB5_Pin) == SET){
+ 116              		.loc 1 63 2 is_stmt 1 view .LVU25
+ 117              		.loc 1 63 5 is_stmt 0 view .LVU26
+ 118 0032 1021     		movs	r1, #16
+ 119 0034 1A48     		ldr	r0, .L16+4
+ 120 0036 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 121              	.LVL4:
+ 122              		.loc 1 63 4 view .LVU27
+ 123 003a 0128     		cmp	r0, #1
+ 124 003c 24D0     		beq	.L15
+ 125              	.L4:
+  64:ContrlSys/vibra.c **** 		if(ES.Need_hit==4){
+  65:ContrlSys/vibra.c **** 		vibra_flag[4]=1;
+  66:ContrlSys/vibra.c **** 		}
+  67:ContrlSys/vibra.c **** 	//	vibra_flag[4]=1;
+  68:ContrlSys/vibra.c **** 	}	
+  69:ContrlSys/vibra.c **** }...
+ 126              		.loc 1 69 1 view .LVU28
+ 127 003e 08BD     		pop	{r3, pc}
+ 128              	.L11:
+  40:ContrlSys/vibra.c **** 		if(ES.Need_hit==0){
+ 129              		.loc 1 40 3 is_stmt 1 view .LVU29
+  40:ContrlSys/vibra.c **** 		if(ES.Need_hit==0){
+ 130              		.loc 1 40 8 is_stmt 0 view .LVU30
+ 131 0040 184B     		ldr	r3, .L16+8
+ 132 0042 93F86730 		ldrb	r3, [r3, #103]	@ zero_extendqisi2
+  40:ContrlSys/vibra.c **** 		if(ES.Need_hit==0){
+ 133              		.loc 1 40 5 view .LVU31
+ 134 0046 002B     		cmp	r3, #0
+ 135 0048 E1D1     		bne	.L5
+  41:ContrlSys/vibra.c **** 		vibra_flag[0]=1;
+ 136              		.loc 1 41 3 is_stmt 1 view .LVU32
+  41:ContrlSys/vibra.c **** 		vibra_flag[0]=1;
+ 137              		.loc 1 41 16 is_stmt 0 view .LVU33
+ 138 004a 174B     		ldr	r3, .L16+12
+ 139 004c 0122     		movs	r2, #1
+ 140 004e 1A60     		str	r2, [r3]
+ 141 0050 DDE7     		b	.L5
+ 142              	.L12:
+  46:ContrlSys/vibra.c **** 		if(ES.Need_hit==3){
+ 143              		.loc 1 46 3 is_stmt 1 view .LVU34
+  46:ContrlSys/vibra.c **** 		if(ES.Need_hit==3){
+ 144              		.loc 1 46 8 is_stmt 0 view .LVU35
+ 145 0052 144B     		ldr	r3, .L16+8
+ 146 0054 93F86730 		ldrb	r3, [r3, #103]	@ zero_extendqisi2
+  46:ContrlSys/vibra.c **** 		if(ES.Need_hit==3){
+ 147              		.loc 1 46 5 view .LVU36
+ 148 0058 032B     		cmp	r3, #3
+ 149 005a DED1     		bne	.L6
+  47:ContrlSys/vibra.c **** 		vibra_flag[3]=1;
+ 150              		.loc 1 47 3 is_stmt 1 view .LVU37
+  47:ContrlSys/vibra.c **** 		vibra_flag[3]=1;
+ 151              		.loc 1 47 16 is_stmt 0 view .LVU38
+ 152 005c 124B     		ldr	r3, .L16+12
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 5
+
+
+ 153 005e 0122     		movs	r2, #1
+ 154 0060 DA60     		str	r2, [r3, #12]
+ 155 0062 DAE7     		b	.L6
+ 156              	.L13:
+  52:ContrlSys/vibra.c **** 		if(ES.Need_hit==1){
+ 157              		.loc 1 52 3 is_stmt 1 view .LVU39
+  52:ContrlSys/vibra.c **** 		if(ES.Need_hit==1){
+ 158              		.loc 1 52 8 is_stmt 0 view .LVU40
+ 159 0064 0F4B     		ldr	r3, .L16+8
+ 160 0066 93F86730 		ldrb	r3, [r3, #103]	@ zero_extendqisi2
+  52:ContrlSys/vibra.c **** 		if(ES.Need_hit==1){
+ 161              		.loc 1 52 5 view .LVU41
+ 162 006a 012B     		cmp	r3, #1
+ 163 006c DBD1     		bne	.L7
+  53:ContrlSys/vibra.c **** 		vibra_flag[1]=1;
+ 164              		.loc 1 53 3 is_stmt 1 view .LVU42
+  53:ContrlSys/vibra.c **** 		vibra_flag[1]=1;
+ 165              		.loc 1 53 16 is_stmt 0 view .LVU43
+ 166 006e 0E4B     		ldr	r3, .L16+12
+ 167 0070 0122     		movs	r2, #1
+ 168 0072 5A60     		str	r2, [r3, #4]
+ 169 0074 D7E7     		b	.L7
+ 170              	.L14:
+  58:ContrlSys/vibra.c **** 		if(ES.Need_hit==2){
+ 171              		.loc 1 58 3 is_stmt 1 view .LVU44
+  58:ContrlSys/vibra.c **** 		if(ES.Need_hit==2){
+ 172              		.loc 1 58 8 is_stmt 0 view .LVU45
+ 173 0076 0B4B     		ldr	r3, .L16+8
+ 174 0078 93F86730 		ldrb	r3, [r3, #103]	@ zero_extendqisi2
+  58:ContrlSys/vibra.c **** 		if(ES.Need_hit==2){
+ 175              		.loc 1 58 5 view .LVU46
+ 176 007c 022B     		cmp	r3, #2
+ 177 007e D8D1     		bne	.L8
+  59:ContrlSys/vibra.c **** 		vibra_flag[2]=1;
+ 178              		.loc 1 59 3 is_stmt 1 view .LVU47
+  59:ContrlSys/vibra.c **** 		vibra_flag[2]=1;
+ 179              		.loc 1 59 16 is_stmt 0 view .LVU48
+ 180 0080 094B     		ldr	r3, .L16+12
+ 181 0082 0122     		movs	r2, #1
+ 182 0084 9A60     		str	r2, [r3, #8]
+ 183 0086 D4E7     		b	.L8
+ 184              	.L15:
+  64:ContrlSys/vibra.c **** 		if(ES.Need_hit==4){
+ 185              		.loc 1 64 3 is_stmt 1 view .LVU49
+  64:ContrlSys/vibra.c **** 		if(ES.Need_hit==4){
+ 186              		.loc 1 64 8 is_stmt 0 view .LVU50
+ 187 0088 064B     		ldr	r3, .L16+8
+ 188 008a 93F86730 		ldrb	r3, [r3, #103]	@ zero_extendqisi2
+  64:ContrlSys/vibra.c **** 		if(ES.Need_hit==4){
+ 189              		.loc 1 64 5 view .LVU51
+ 190 008e 042B     		cmp	r3, #4
+ 191 0090 D5D1     		bne	.L4
+  65:ContrlSys/vibra.c **** 		vibra_flag[4]=1;
+ 192              		.loc 1 65 3 is_stmt 1 view .LVU52
+  65:ContrlSys/vibra.c **** 		vibra_flag[4]=1;
+ 193              		.loc 1 65 16 is_stmt 0 view .LVU53
+ 194 0092 054B     		ldr	r3, .L16+12
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 6
+
+
+ 195 0094 0122     		movs	r2, #1
+ 196 0096 1A61     		str	r2, [r3, #16]
+ 197              		.loc 1 69 1 view .LVU54
+ 198 0098 D1E7     		b	.L4
+ 199              	.L17:
+ 200 009a 00BF     		.align	2
+ 201              	.L16:
+ 202 009c 00080140 		.word	1073809408
+ 203 00a0 00100140 		.word	1073811456
+ 204 00a4 00000000 		.word	ES
+ 205 00a8 00000000 		.word	.LANCHOR0
+ 206              		.cfi_endproc
+ 207              	.LFE66:
+ 209              		.global	vibra_flag
+ 210              		.section	.bss.vibra_flag,"aw",%nobits
+ 211              		.align	2
+ 212              		.set	.LANCHOR0,. + 0
+ 215              	vibra_flag:
+ 216 0000 00000000 		.space	20
+ 216      00000000 
+ 216      00000000 
+ 216      00000000 
+ 216      00000000 
+ 217              		.text
+ 218              	.Letext0:
+ 219              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 220              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 221              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 222              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 223              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 224              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 225              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 226              		.file 9 "ContrlSys/ctr.h"
+ 227              		.file 10 "ContrlSys/vibra.h"
+ 228              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ARM GAS  C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vibra.c
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:18     .text.Vibra_Init:00000000 $t
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:24     .text.Vibra_Init:00000000 Vibra_Init
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:54     .text.Vibra_Init:00000010 $d
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:59     .text.Vibra_monitor:00000000 $t
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:65     .text.Vibra_monitor:00000000 Vibra_monitor
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:202    .text.Vibra_monitor:0000009c $d
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:215    .bss.vibra_flag:00000000 vibra_flag
+C:\Users\21945\AppData\Local\Temp\ccY4bh1b.s:211    .bss.vibra_flag:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_ReadPin
+ES

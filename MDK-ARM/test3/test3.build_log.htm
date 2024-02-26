@@ -1,0 +1,129 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: luo bai, HEU, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\1111\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      CMSIS_AGDI.dll V1.33.15.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\Data\RM\diankongdaima\dafu\1\2\Energy organ body light board (2)\MDK-ARM\test3.uvprojx
+Project File Date:  01/13/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\1111\Bin'
+Rebuild target 'test3'
+Note: source file '../Core/Src/system_stm32f1xx.c' - object file renamed from 'test3\system_stm32f1xx.o' to 'test3\system_stm32f1xx_1.o'.
+assembling startup_stm32f103xe.s...
+compiling main.c...
+../ContrlSys/ctr.h(72): warning:  #1295-D: Deprecated declaration fan_list_init - give arg types
+  void fan_list_init();
+../ContrlSys/ctr.h(78): warning:  #1295-D: Deprecated declaration boot_init - give arg types
+  void boot_init();
+../ContrlSys/ctr.h(87): warning:  #1-D: last line of file ends without a newline
+  #endif
+../ContrlSys/vibra.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/main.c: 4 warnings, 0 errors
+compiling gpio.c...
+compiling dma.c...
+compiling tim.c...
+compiling stm32f1xx_it.c...
+compiling stm32f1xx_hal_msp.c...
+compiling WS2812.c...
+../ContrlSys/ctr.h(72): warning:  #1295-D: Deprecated declaration fan_list_init - give arg types
+  void fan_list_init();
+../ContrlSys/ctr.h(78): warning:  #1295-D: Deprecated declaration boot_init - give arg types
+  void boot_init();
+../ContrlSys/ctr.h(87): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\BSP\WS2812.c: 3 warnings, 0 errors
+compiling bsp_dwt.c...
+..\BSP\bsp_dwt.c(16): warning:  #550-D: variable "CYCCNT_RountCount"  was set but never used
+  static uint32_t CYCCNT_RountCount;
+..\BSP\bsp_dwt.c(17): warning:  #550-D: variable "DWT_Timeline"  was set but never used
+  static float DWT_Timeline;
+..\BSP\bsp_dwt.c: 2 warnings, 0 errors
+compiling ctr.c...
+..\ContrlSys\ctr.h(72): warning:  #1295-D: Deprecated declaration fan_list_init - give arg types
+  void fan_list_init();
+..\ContrlSys\ctr.h(78): warning:  #1295-D: Deprecated declaration boot_init - give arg types
+  void boot_init();
+..\ContrlSys\ctr.h(87): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\ContrlSys\vibra.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\ContrlSys\ctr.c(174): warning:  #177-D: variable "logic_check"  was declared but never referenced
+    static uint8_t logic_check = 0;
+..\ContrlSys\ctr.c: 5 warnings, 0 errors
+compiling vibra.c...
+..\ContrlSys\vibra.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\ContrlSys\ctr.h(72): warning:  #1295-D: Deprecated declaration fan_list_init - give arg types
+  void fan_list_init();
+..\ContrlSys\ctr.h(78): warning:  #1295-D: Deprecated declaration boot_init - give arg types
+  void boot_init();
+..\ContrlSys\ctr.h(87): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\ContrlSys\vibra.c(46): warning:  #1-D: last line of file ends without a newline
+  }
+..\ContrlSys\vibra.c: 5 warnings, 0 errors
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling stm32f1xx_hal_tim.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_dma.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_flash.c...
+compiling stm32f1xx_hal_flash_ex.c...
+compiling stm32f1xx_hal_exti.c...
+compiling system_stm32f1xx.c...
+linking...
+Program Size: Code=9524 RO-data=352 RW-data=112 ZI-data=42344  
+FromELF: creating hex file...
+"test3\test3.axf" - 0 Error(s), 19 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_test3
+  C:/Users/21945/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/21945/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:24
+</pre>
+</body>
+</html>

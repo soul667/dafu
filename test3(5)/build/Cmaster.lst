@@ -1,0 +1,216 @@
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cctHdxyg.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Cmaster.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Boot_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	Boot_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	Boot_Init:
+  25              	.LFB65:
+  26              		.file 1 "ContrlSys/Cmaster.c"
+   1:ContrlSys/Cmaster.c **** #include "Cmaster.h"
+   2:ContrlSys/Cmaster.c **** #include "ctr.h"
+   3:ContrlSys/Cmaster.c **** #include "vibra.h"
+   4:ContrlSys/Cmaster.c **** #include <stdlib.h>
+   5:ContrlSys/Cmaster.c **** 
+   6:ContrlSys/Cmaster.c **** extern EnergySys ES;
+   7:ContrlSys/Cmaster.c **** 
+   8:ContrlSys/Cmaster.c **** /*
+   9:ContrlSys/Cmaster.c **** *
+  10:ContrlSys/Cmaster.c **** *启动程序
+  11:ContrlSys/Cmaster.c **** *
+  12:ContrlSys/Cmaster.c **** **/
+  13:ContrlSys/Cmaster.c **** void Boot_Init()
+  14:ContrlSys/Cmaster.c **** {
+  27              		.loc 1 14 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  15:ContrlSys/Cmaster.c **** 	Fan_Init();
+  36              		.loc 1 15 2 view .LVU1
+  37 0002 FFF7FEFF 		bl	Fan_Init
+  38              	.LVL0:
+  16:ContrlSys/Cmaster.c **** 	Vibra_Init();
+  39              		.loc 1 16 2 view .LVU2
+  40 0006 FFF7FEFF 		bl	Vibra_Init
+  41              	.LVL1:
+  17:ContrlSys/Cmaster.c **** 	ES.timeStamp = 0;
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cctHdxyg.s 			page 2
+
+
+  42              		.loc 1 17 2 view .LVU3
+  43              		.loc 1 17 15 is_stmt 0 view .LVU4
+  44 000a 034B     		ldr	r3, .L3
+  45 000c 0022     		movs	r2, #0
+  46 000e 1A66     		str	r2, [r3, #96]
+  18:ContrlSys/Cmaster.c **** 	ES.state = 0;
+  47              		.loc 1 18 2 is_stmt 1 view .LVU5
+  48              		.loc 1 18 11 is_stmt 0 view .LVU6
+  49 0010 83F86420 		strb	r2, [r3, #100]
+  19:ContrlSys/Cmaster.c **** //	LED_YUAN_Init();
+  20:ContrlSys/Cmaster.c **** //	LINE_Init();
+  21:ContrlSys/Cmaster.c **** }
+  50              		.loc 1 21 1 view .LVU7
+  51 0014 08BD     		pop	{r3, pc}
+  52              	.L4:
+  53 0016 00BF     		.align	2
+  54              	.L3:
+  55 0018 00000000 		.word	ES
+  56              		.cfi_endproc
+  57              	.LFE65:
+  59              		.section	.text.Dynamic_de,"ax",%progbits
+  60              		.align	1
+  61              		.global	Dynamic_de
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	Dynamic_de:
+  67              	.LVL2:
+  68              	.LFB66:
+  22:ContrlSys/Cmaster.c **** 
+  23:ContrlSys/Cmaster.c **** /*
+  24:ContrlSys/Cmaster.c **** *
+  25:ContrlSys/Cmaster.c **** *动态检测
+  26:ContrlSys/Cmaster.c **** *
+  27:ContrlSys/Cmaster.c **** **/
+  28:ContrlSys/Cmaster.c **** void Dynamic_de(int s,int RGB)
+  29:ContrlSys/Cmaster.c **** {
+  69              		.loc 1 29 1 is_stmt 1 view -0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		.loc 1 29 1 is_stmt 0 view .LVU9
+  74 0000 38B5     		push	{r3, r4, r5, lr}
+  75              	.LCFI1:
+  76              		.cfi_def_cfa_offset 16
+  77              		.cfi_offset 3, -16
+  78              		.cfi_offset 4, -12
+  79              		.cfi_offset 5, -8
+  80              		.cfi_offset 14, -4
+  81 0002 0446     		mov	r4, r0
+  82 0004 0D46     		mov	r5, r1
+  30:ContrlSys/Cmaster.c **** 	 Vibra_monitor();
+  83              		.loc 1 30 3 is_stmt 1 view .LVU10
+  84 0006 FFF7FEFF 		bl	Vibra_monitor
+  85              	.LVL3:
+  31:ContrlSys/Cmaster.c **** 	 Ctr_Fan(s,RGB);
+  86              		.loc 1 31 3 view .LVU11
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cctHdxyg.s 			page 3
+
+
+  87 000a 2946     		mov	r1, r5
+  88 000c 2046     		mov	r0, r4
+  89 000e FFF7FEFF 		bl	Ctr_Fan
+  90              	.LVL4:
+  32:ContrlSys/Cmaster.c **** }
+  91              		.loc 1 32 1 is_stmt 0 view .LVU12
+  92 0012 38BD     		pop	{r3, r4, r5, pc}
+  93              		.loc 1 32 1 view .LVU13
+  94              		.cfi_endproc
+  95              	.LFE66:
+  97              		.section	.text.Rand_Number,"ax",%progbits
+  98              		.align	1
+  99              		.global	Rand_Number
+ 100              		.syntax unified
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	Rand_Number:
+ 105              	.LFB67:
+  33:ContrlSys/Cmaster.c **** 
+  34:ContrlSys/Cmaster.c **** /*
+  35:ContrlSys/Cmaster.c **** *
+  36:ContrlSys/Cmaster.c **** *随机数生成
+  37:ContrlSys/Cmaster.c **** *
+  38:ContrlSys/Cmaster.c **** **/
+  39:ContrlSys/Cmaster.c **** int Rand_Number()
+  40:ContrlSys/Cmaster.c **** {
+ 106              		.loc 1 40 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 08B5     		push	{r3, lr}
+ 111              	.LCFI2:
+ 112              		.cfi_def_cfa_offset 8
+ 113              		.cfi_offset 3, -8
+ 114              		.cfi_offset 14, -4
+  41:ContrlSys/Cmaster.c **** 	int num;
+ 115              		.loc 1 41 2 view .LVU15
+  42:ContrlSys/Cmaster.c **** 	num = rand() % 4; //产生0~4的随机数
+ 116              		.loc 1 42 2 view .LVU16
+ 117              		.loc 1 42 8 is_stmt 0 view .LVU17
+ 118 0002 FFF7FEFF 		bl	rand
+ 119              	.LVL5:
+ 120              		.loc 1 42 6 view .LVU18
+ 121 0006 4342     		rsbs	r3, r0, #0
+ 122 0008 00F00300 		and	r0, r0, #3
+ 123 000c 03F00303 		and	r3, r3, #3
+ 124              	.LVL6:
+  43:ContrlSys/Cmaster.c **** 
+  44:ContrlSys/Cmaster.c **** 	return num;
+ 125              		.loc 1 44 2 is_stmt 1 view .LVU19
+  45:ContrlSys/Cmaster.c **** }
+ 126              		.loc 1 45 1 is_stmt 0 view .LVU20
+ 127 0010 58BF     		it	pl
+ 128 0012 5842     		rsbpl	r0, r3, #0
+ 129              	.LVL7:
+ 130              		.loc 1 45 1 view .LVU21
+ 131 0014 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cctHdxyg.s 			page 4
+
+
+ 132              		.cfi_endproc
+ 133              	.LFE67:
+ 135              		.text
+ 136              	.Letext0:
+ 137              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 138              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 139              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 140              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 141              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 142              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 143              		.file 8 "ContrlSys/ctr.h"
+ 144              		.file 9 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 145              		.file 10 "ContrlSys/vibra.h"
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cctHdxyg.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Cmaster.c
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:18     .text.Boot_Init:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:24     .text.Boot_Init:00000000 Boot_Init
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:55     .text.Boot_Init:00000018 $d
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:60     .text.Dynamic_de:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:66     .text.Dynamic_de:00000000 Dynamic_de
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:98     .text.Rand_Number:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cctHdxyg.s:104    .text.Rand_Number:00000000 Rand_Number
+
+UNDEFINED SYMBOLS
+Fan_Init
+Vibra_Init
+ES
+Vibra_monitor
+Ctr_Fan
+rand

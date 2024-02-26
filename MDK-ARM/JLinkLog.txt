@@ -1,0 +1,14 @@
+T1834 001:684.450   SEGGER J-Link V6.65b (beta) Log File
+T1834 001:684.667   DLL Compiled: Mar 18 2020 09:53:27
+T1834 001:684.671   Logging started @ 2024-01-15 15:37
+T1834 001:684.678 JLINK_SetWarnOutHandler(...)
+T1834 001:684.682 - 0.006ms
+T1834 001:684.688 JLINK_OpenEx(...)
+T1834 001:779.332   
+  ***** Error: 
+T1834 001:779.372   EMU_GetFirmwareString: Insufficient data read when trying to read the string length.
+T1834 001:780.670 - 95.987ms returns "EMU_GetFirmwareString: Insufficient data read when trying to read the string length."
+T1834 010:708.964 JLINK_Close()
+T1834 010:709.079 - 0.123ms
+T1834 010:709.089   
+T1834 010:709.093   Closed

@@ -1,0 +1,1871 @@
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"WS2812.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.LINE_UpdateBuf,"ax",%progbits
+  18              		.align	1
+  19              		.global	LINE_UpdateBuf
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	LINE_UpdateBuf:
+  25              	.LFB68:
+  26              		.file 1 "BSP/WS2812.c"
+   1:BSP/WS2812.c  **** #include "ws2812.h"
+   2:BSP/WS2812.c  **** #include <stdio.h>
+   3:BSP/WS2812.c  **** #include "dma.h"
+   4:BSP/WS2812.c  **** #include "tim.h"
+   5:BSP/WS2812.c  **** #include <stdlib.h>
+   6:BSP/WS2812.c  **** #include "ctr.h"
+   7:BSP/WS2812.c  **** 
+   8:BSP/WS2812.c  **** 
+   9:BSP/WS2812.c  **** uint32_t WS2812B_Buf[All_Number];	//0xGGRRBB
+  10:BSP/WS2812.c  **** uint32_t WS2812B_Bit[24*All_Number+1];//Õâ¸öÊÇ½«ÉÏÃæµÄbuffer²ð½â³Ébit
+  11:BSP/WS2812.c  **** uint8_t WS2812B_Flag;
+  12:BSP/WS2812.c  **** 
+  13:BSP/WS2812.c  **** uint32_t tim5_flag = 0;
+  14:BSP/WS2812.c  **** 
+  15:BSP/WS2812.c  **** void WS2812B_IRQHandler(void);
+  16:BSP/WS2812.c  **** 
+  17:BSP/WS2812.c  **** /*
+  18:BSP/WS2812.c  **** *Íâ¿ò
+  19:BSP/WS2812.c  **** *
+  20:BSP/WS2812.c  **** **/
+  21:BSP/WS2812.c  **** void LINE_UpdateBuf(void)
+  22:BSP/WS2812.c  **** {
+  27              		.loc 1 22 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  23:BSP/WS2812.c  **** 	uint32_t i,j;
+  32              		.loc 1 23 2 view .LVU1
+  24:BSP/WS2812.c  **** 	for(j=TWO_Number;j<All_Number;j++)
+  33              		.loc 1 24 2 view .LVU2
+  34              	.LVL0:
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 2
+
+
+  35              		.loc 1 24 7 is_stmt 0 view .LVU3
+  36 0000 40F25111 		movw	r1, #337
+  37              		.loc 1 24 2 view .LVU4
+  38 0004 26E0     		b	.L9
+  39              	.LVL1:
+  40              	.L3:
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 4, -4
+  25:BSP/WS2812.c  **** 	{
+  26:BSP/WS2812.c  **** 		for(i=0;i<24;i++)
+  27:BSP/WS2812.c  **** 		{
+  28:BSP/WS2812.c  **** 			if(WS2812B_Buf[j]&(0x800000>>i)){WS2812B_Bit[j*24+i+1]=45;}  //BITÎ»Îª1 ÉèÖÃÏàÓ¦µÄÕ¼¿Õ±È
+  29:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  44              		.loc 1 29 9 is_stmt 1 view .LVU5
+  45              		.loc 1 29 22 is_stmt 0 view .LVU6
+  46 0006 01EB4100 		add	r0, r1, r1, lsl #1
+  47 000a C200     		lsls	r2, r0, #3
+  48              		.loc 1 29 25 view .LVU7
+  49 000c 1A44     		add	r2, r2, r3
+  50              		.loc 1 29 27 view .LVU8
+  51 000e 0132     		adds	r2, r2, #1
+  52              		.loc 1 29 30 view .LVU9
+  53 0010 1548     		ldr	r0, .L18
+  54 0012 1924     		movs	r4, #25
+  55 0014 40F82240 		str	r4, [r0, r2, lsl #2]
+  56              	.L4:
+  26:BSP/WS2812.c  **** 		{
+  57              		.loc 1 26 16 is_stmt 1 discriminator 2 view .LVU10
+  26:BSP/WS2812.c  **** 		{
+  58              		.loc 1 26 17 is_stmt 0 discriminator 2 view .LVU11
+  59 0018 0133     		adds	r3, r3, #1
+  60              	.LVL2:
+  61              	.L6:
+  26:BSP/WS2812.c  **** 		{
+  62              		.loc 1 26 11 is_stmt 1 discriminator 1 view .LVU12
+  26:BSP/WS2812.c  **** 		{
+  63              		.loc 1 26 3 is_stmt 0 discriminator 1 view .LVU13
+  64 001a 172B     		cmp	r3, #23
+  65 001c 11D8     		bhi	.L14
+  66              	.L5:
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  67              		.loc 1 28 4 is_stmt 1 view .LVU14
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  68              		.loc 1 28 18 is_stmt 0 view .LVU15
+  69 001e 134A     		ldr	r2, .L18+4
+  70 0020 52F82100 		ldr	r0, [r2, r1, lsl #2]
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  71              		.loc 1 28 31 view .LVU16
+  72 0024 4FF40002 		mov	r2, #8388608
+  73 0028 1A41     		asrs	r2, r2, r3
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  74              		.loc 1 28 6 view .LVU17
+  75 002a 1042     		tst	r0, r2
+  76 002c EBD0     		beq	.L3
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  77              		.loc 1 28 37 is_stmt 1 discriminator 1 view .LVU18
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 3
+
+
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  78              		.loc 1 28 50 is_stmt 0 discriminator 1 view .LVU19
+  79 002e 01EB4100 		add	r0, r1, r1, lsl #1
+  80 0032 C200     		lsls	r2, r0, #3
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  81              		.loc 1 28 53 discriminator 1 view .LVU20
+  82 0034 1A44     		add	r2, r2, r3
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  83              		.loc 1 28 55 discriminator 1 view .LVU21
+  84 0036 0132     		adds	r2, r2, #1
+  28:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+  85              		.loc 1 28 58 discriminator 1 view .LVU22
+  86 0038 0B48     		ldr	r0, .L18
+  87 003a 2D24     		movs	r4, #45
+  88 003c 40F82240 		str	r4, [r0, r2, lsl #2]
+  89 0040 EAE7     		b	.L4
+  90              	.L14:
+  24:BSP/WS2812.c  **** 	{
+  91              		.loc 1 24 32 is_stmt 1 discriminator 2 view .LVU23
+  24:BSP/WS2812.c  **** 	{
+  92              		.loc 1 24 33 is_stmt 0 discriminator 2 view .LVU24
+  93 0042 0131     		adds	r1, r1, #1
+  94              	.LVL3:
+  24:BSP/WS2812.c  **** 	{
+  95              		.loc 1 24 19 is_stmt 1 discriminator 2 view .LVU25
+  24:BSP/WS2812.c  **** 	{
+  96              		.loc 1 24 2 is_stmt 0 discriminator 2 view .LVU26
+  97 0044 B1F5C87F 		cmp	r1, #400
+  98 0048 01D8     		bhi	.L15
+  26:BSP/WS2812.c  **** 		{
+  99              		.loc 1 26 8 view .LVU27
+ 100 004a 0023     		movs	r3, #0
+ 101              	.LVL4:
+  26:BSP/WS2812.c  **** 		{
+ 102              		.loc 1 26 8 view .LVU28
+ 103 004c E5E7     		b	.L6
+ 104              	.LVL5:
+ 105              	.L15:
+  30:BSP/WS2812.c  **** 		}
+  31:BSP/WS2812.c  **** 	}
+  32:BSP/WS2812.c  **** 
+  33:BSP/WS2812.c  **** }
+ 106              		.loc 1 33 1 view .LVU29
+ 107 004e 10BC     		pop	{r4}
+ 108              	.LCFI1:
+ 109              		.cfi_restore 4
+ 110              		.cfi_def_cfa_offset 0
+ 111 0050 7047     		bx	lr
+ 112              	.L17:
+  24:BSP/WS2812.c  **** 	{
+ 113              		.loc 1 24 32 is_stmt 1 view .LVU30
+  24:BSP/WS2812.c  **** 	{
+ 114              		.loc 1 24 33 is_stmt 0 view .LVU31
+ 115 0052 0131     		adds	r1, r1, #1
+ 116              	.LVL6:
+ 117              	.L9:
+  24:BSP/WS2812.c  **** 	{
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 4
+
+
+ 118              		.loc 1 24 19 is_stmt 1 view .LVU32
+  24:BSP/WS2812.c  **** 	{
+ 119              		.loc 1 24 2 is_stmt 0 view .LVU33
+ 120 0054 B1F5C87F 		cmp	r1, #400
+ 121 0058 04D8     		bhi	.L16
+  26:BSP/WS2812.c  **** 		{
+ 122              		.loc 1 26 8 view .LVU34
+ 123 005a 0023     		movs	r3, #0
+ 124              	.LVL7:
+  26:BSP/WS2812.c  **** 		{
+ 125              		.loc 1 26 11 is_stmt 1 view .LVU35
+  26:BSP/WS2812.c  **** 		{
+ 126              		.loc 1 26 3 is_stmt 0 view .LVU36
+ 127 005c 172B     		cmp	r3, #23
+ 128 005e F8D8     		bhi	.L17
+  22:BSP/WS2812.c  **** 	uint32_t i,j;
+ 129              		.loc 1 22 1 view .LVU37
+ 130 0060 10B4     		push	{r4}
+ 131              	.LCFI2:
+ 132              		.cfi_def_cfa_offset 4
+ 133              		.cfi_offset 4, -4
+ 134 0062 DCE7     		b	.L5
+ 135              	.LVL8:
+ 136              	.L16:
+ 137              	.LCFI3:
+ 138              		.cfi_def_cfa_offset 0
+ 139              		.cfi_restore 4
+  22:BSP/WS2812.c  **** 	uint32_t i,j;
+ 140              		.loc 1 22 1 view .LVU38
+ 141 0064 7047     		bx	lr
+ 142              	.L19:
+ 143 0066 00BF     		.align	2
+ 144              	.L18:
+ 145 0068 00000000 		.word	WS2812B_Bit
+ 146 006c 00000000 		.word	.LANCHOR0
+ 147              		.cfi_endproc
+ 148              	.LFE68:
+ 150              		.section	.text.LINE_SetBuf,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	LINE_SetBuf
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	LINE_SetBuf:
+ 158              	.LVL9:
+ 159              	.LFB69:
+  34:BSP/WS2812.c  **** 
+  35:BSP/WS2812.c  **** /*
+  36:BSP/WS2812.c  **** *Íâ¿ò
+  37:BSP/WS2812.c  **** *
+  38:BSP/WS2812.c  **** **/
+  39:BSP/WS2812.c  **** void LINE_SetBuf(int RGB)
+  40:BSP/WS2812.c  **** {
+ 160              		.loc 1 40 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 5
+
+
+ 164              		@ link register save eliminated.
+  41:BSP/WS2812.c  **** 	uint32_t i,j;
+ 165              		.loc 1 41 2 view .LVU40
+  42:BSP/WS2812.c  **** 	for(i=TWO_Number;i<All_Number;i++)
+ 166              		.loc 1 42 2 view .LVU41
+ 167              		.loc 1 42 7 is_stmt 0 view .LVU42
+ 168 0000 40F25113 		movw	r3, #337
+ 169              		.loc 1 42 2 view .LVU43
+ 170 0004 03E0     		b	.L21
+ 171              	.LVL10:
+ 172              	.L22:
+  43:BSP/WS2812.c  **** 	{
+  44:BSP/WS2812.c  **** 		WS2812B_Buf[i]=RGB;
+ 173              		.loc 1 44 3 is_stmt 1 discriminator 3 view .LVU44
+ 174              		.loc 1 44 17 is_stmt 0 discriminator 3 view .LVU45
+ 175 0006 044A     		ldr	r2, .L23
+ 176 0008 42F82300 		str	r0, [r2, r3, lsl #2]
+  42:BSP/WS2812.c  **** 	for(i=TWO_Number;i<All_Number;i++)
+ 177              		.loc 1 42 32 is_stmt 1 discriminator 3 view .LVU46
+  42:BSP/WS2812.c  **** 	for(i=TWO_Number;i<All_Number;i++)
+ 178              		.loc 1 42 33 is_stmt 0 discriminator 3 view .LVU47
+ 179 000c 0133     		adds	r3, r3, #1
+ 180              	.LVL11:
+ 181              	.L21:
+  42:BSP/WS2812.c  **** 	for(i=TWO_Number;i<All_Number;i++)
+ 182              		.loc 1 42 19 is_stmt 1 discriminator 1 view .LVU48
+  42:BSP/WS2812.c  **** 	for(i=TWO_Number;i<All_Number;i++)
+ 183              		.loc 1 42 2 is_stmt 0 discriminator 1 view .LVU49
+ 184 000e B3F5C87F 		cmp	r3, #400
+ 185 0012 F8D9     		bls	.L22
+  45:BSP/WS2812.c  **** 	}
+  46:BSP/WS2812.c  **** }
+ 186              		.loc 1 46 1 view .LVU50
+ 187 0014 7047     		bx	lr
+ 188              	.L24:
+ 189 0016 00BF     		.align	2
+ 190              	.L23:
+ 191 0018 00000000 		.word	.LANCHOR0
+ 192              		.cfi_endproc
+ 193              	.LFE69:
+ 195              		.section	.text.OUT_ClearBuf,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	OUT_ClearBuf
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	OUT_ClearBuf:
+ 203              	.LFB70:
+  47:BSP/WS2812.c  **** 
+  48:BSP/WS2812.c  **** 
+  49:BSP/WS2812.c  **** /*
+  50:BSP/WS2812.c  **** *
+  51:BSP/WS2812.c  **** *Ô²ÐÍ°å
+  52:BSP/WS2812.c  **** *
+  53:BSP/WS2812.c  **** **/
+  54:BSP/WS2812.c  **** void OUT_ClearBuf(void)
+  55:BSP/WS2812.c  **** {
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 6
+
+
+ 204              		.loc 1 55 1 is_stmt 1 view -0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208              		@ link register save eliminated.
+  56:BSP/WS2812.c  **** 	uint32_t i,j;
+ 209              		.loc 1 56 2 view .LVU52
+  57:BSP/WS2812.c  **** 	for(i=WS2812B_LED_QUANTITY;i<WS2812B_LED_QUANTITY+OUTER;i++)
+ 210              		.loc 1 57 2 view .LVU53
+ 211              	.LVL12:
+ 212              		.loc 1 57 7 is_stmt 0 view .LVU54
+ 213 0000 AF23     		movs	r3, #175
+ 214              		.loc 1 57 2 view .LVU55
+ 215 0002 05E0     		b	.L26
+ 216              	.LVL13:
+ 217              	.L27:
+  58:BSP/WS2812.c  **** 	{
+  59:BSP/WS2812.c  **** 		WS2812B_Buf[i]=0x00ff00;
+ 218              		.loc 1 59 3 is_stmt 1 discriminator 3 view .LVU56
+ 219              		.loc 1 59 17 is_stmt 0 discriminator 3 view .LVU57
+ 220 0004 044A     		ldr	r2, .L28
+ 221 0006 4FF47F41 		mov	r1, #65280
+ 222 000a 42F82310 		str	r1, [r2, r3, lsl #2]
+  57:BSP/WS2812.c  **** 	for(i=WS2812B_LED_QUANTITY;i<WS2812B_LED_QUANTITY+OUTER;i++)
+ 223              		.loc 1 57 58 is_stmt 1 discriminator 3 view .LVU58
+  57:BSP/WS2812.c  **** 	for(i=WS2812B_LED_QUANTITY;i<WS2812B_LED_QUANTITY+OUTER;i++)
+ 224              		.loc 1 57 59 is_stmt 0 discriminator 3 view .LVU59
+ 225 000e 0133     		adds	r3, r3, #1
+ 226              	.LVL14:
+ 227              	.L26:
+  57:BSP/WS2812.c  **** 	for(i=WS2812B_LED_QUANTITY;i<WS2812B_LED_QUANTITY+OUTER;i++)
+ 228              		.loc 1 57 29 is_stmt 1 discriminator 1 view .LVU60
+  57:BSP/WS2812.c  **** 	for(i=WS2812B_LED_QUANTITY;i<WS2812B_LED_QUANTITY+OUTER;i++)
+ 229              		.loc 1 57 2 is_stmt 0 discriminator 1 view .LVU61
+ 230 0010 B3F5A87F 		cmp	r3, #336
+ 231 0014 F6D9     		bls	.L27
+  60:BSP/WS2812.c  **** 	}
+  61:BSP/WS2812.c  **** }
+ 232              		.loc 1 61 1 view .LVU62
+ 233 0016 7047     		bx	lr
+ 234              	.L29:
+ 235              		.align	2
+ 236              	.L28:
+ 237 0018 00000000 		.word	.LANCHOR0
+ 238              		.cfi_endproc
+ 239              	.LFE70:
+ 241              		.section	.text.OUT_UpdateBuf,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	OUT_UpdateBuf
+ 244              		.syntax unified
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	OUT_UpdateBuf:
+ 249              	.LFB71:
+  62:BSP/WS2812.c  **** 
+  63:BSP/WS2812.c  **** /*
+  64:BSP/WS2812.c  **** *
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 7
+
+
+  65:BSP/WS2812.c  **** *Ô²ÐÍ°å
+  66:BSP/WS2812.c  **** *
+  67:BSP/WS2812.c  **** **/
+  68:BSP/WS2812.c  **** void OUT_UpdateBuf(void)
+  69:BSP/WS2812.c  **** {
+ 250              		.loc 1 69 1 is_stmt 1 view -0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254              		@ link register save eliminated.
+  70:BSP/WS2812.c  **** 	uint32_t i,j;
+ 255              		.loc 1 70 2 view .LVU64
+  71:BSP/WS2812.c  **** 	for(j=WS2812B_LED_QUANTITY;j<WS2812B_LED_QUANTITY+OUTER;j++)
+ 256              		.loc 1 71 2 view .LVU65
+ 257              	.LVL15:
+ 258              		.loc 1 71 7 is_stmt 0 view .LVU66
+ 259 0000 AF21     		movs	r1, #175
+ 260              		.loc 1 71 2 view .LVU67
+ 261 0002 26E0     		b	.L38
+ 262              	.LVL16:
+ 263              	.L32:
+ 264              	.LCFI4:
+ 265              		.cfi_def_cfa_offset 4
+ 266              		.cfi_offset 4, -4
+  72:BSP/WS2812.c  **** 	{
+  73:BSP/WS2812.c  **** 		for(i=0;i<24;i++)
+  74:BSP/WS2812.c  **** 		{
+  75:BSP/WS2812.c  **** 			if(WS2812B_Buf[j]&(0x800000>>i)){WS2812B_Bit[j*24+i+1]=45;}  //BITÎ»Îª1 ÉèÖÃÏàÓ¦µÄÕ¼¿Õ±È
+  76:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 267              		.loc 1 76 9 is_stmt 1 view .LVU68
+ 268              		.loc 1 76 22 is_stmt 0 view .LVU69
+ 269 0004 01EB4100 		add	r0, r1, r1, lsl #1
+ 270 0008 C200     		lsls	r2, r0, #3
+ 271              		.loc 1 76 25 view .LVU70
+ 272 000a 1A44     		add	r2, r2, r3
+ 273              		.loc 1 76 27 view .LVU71
+ 274 000c 0132     		adds	r2, r2, #1
+ 275              		.loc 1 76 30 view .LVU72
+ 276 000e 1548     		ldr	r0, .L47
+ 277 0010 1924     		movs	r4, #25
+ 278 0012 40F82240 		str	r4, [r0, r2, lsl #2]
+ 279              	.L33:
+  73:BSP/WS2812.c  **** 		{
+ 280              		.loc 1 73 16 is_stmt 1 discriminator 2 view .LVU73
+  73:BSP/WS2812.c  **** 		{
+ 281              		.loc 1 73 17 is_stmt 0 discriminator 2 view .LVU74
+ 282 0016 0133     		adds	r3, r3, #1
+ 283              	.LVL17:
+ 284              	.L35:
+  73:BSP/WS2812.c  **** 		{
+ 285              		.loc 1 73 11 is_stmt 1 discriminator 1 view .LVU75
+  73:BSP/WS2812.c  **** 		{
+ 286              		.loc 1 73 3 is_stmt 0 discriminator 1 view .LVU76
+ 287 0018 172B     		cmp	r3, #23
+ 288 001a 11D8     		bhi	.L43
+ 289              	.L34:
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 8
+
+
+ 290              		.loc 1 75 4 is_stmt 1 view .LVU77
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 291              		.loc 1 75 18 is_stmt 0 view .LVU78
+ 292 001c 124A     		ldr	r2, .L47+4
+ 293 001e 52F82100 		ldr	r0, [r2, r1, lsl #2]
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 294              		.loc 1 75 31 view .LVU79
+ 295 0022 4FF40002 		mov	r2, #8388608
+ 296 0026 1A41     		asrs	r2, r2, r3
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 297              		.loc 1 75 6 view .LVU80
+ 298 0028 1042     		tst	r0, r2
+ 299 002a EBD0     		beq	.L32
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 300              		.loc 1 75 37 is_stmt 1 discriminator 1 view .LVU81
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 301              		.loc 1 75 50 is_stmt 0 discriminator 1 view .LVU82
+ 302 002c 01EB4100 		add	r0, r1, r1, lsl #1
+ 303 0030 C200     		lsls	r2, r0, #3
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 304              		.loc 1 75 53 discriminator 1 view .LVU83
+ 305 0032 1A44     		add	r2, r2, r3
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 306              		.loc 1 75 55 discriminator 1 view .LVU84
+ 307 0034 0132     		adds	r2, r2, #1
+  75:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 308              		.loc 1 75 58 discriminator 1 view .LVU85
+ 309 0036 0B48     		ldr	r0, .L47
+ 310 0038 2D24     		movs	r4, #45
+ 311 003a 40F82240 		str	r4, [r0, r2, lsl #2]
+ 312 003e EAE7     		b	.L33
+ 313              	.L43:
+  71:BSP/WS2812.c  **** 	{
+ 314              		.loc 1 71 58 is_stmt 1 discriminator 2 view .LVU86
+  71:BSP/WS2812.c  **** 	{
+ 315              		.loc 1 71 59 is_stmt 0 discriminator 2 view .LVU87
+ 316 0040 0131     		adds	r1, r1, #1
+ 317              	.LVL18:
+  71:BSP/WS2812.c  **** 	{
+ 318              		.loc 1 71 29 is_stmt 1 discriminator 2 view .LVU88
+  71:BSP/WS2812.c  **** 	{
+ 319              		.loc 1 71 2 is_stmt 0 discriminator 2 view .LVU89
+ 320 0042 B1F5A87F 		cmp	r1, #336
+ 321 0046 01D8     		bhi	.L44
+  73:BSP/WS2812.c  **** 		{
+ 322              		.loc 1 73 8 view .LVU90
+ 323 0048 0023     		movs	r3, #0
+ 324              	.LVL19:
+  73:BSP/WS2812.c  **** 		{
+ 325              		.loc 1 73 8 view .LVU91
+ 326 004a E5E7     		b	.L35
+ 327              	.LVL20:
+ 328              	.L44:
+  77:BSP/WS2812.c  **** 		}
+  78:BSP/WS2812.c  **** 	}
+  79:BSP/WS2812.c  **** 
+  80:BSP/WS2812.c  **** }
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 9
+
+
+ 329              		.loc 1 80 1 view .LVU92
+ 330 004c 10BC     		pop	{r4}
+ 331              	.LCFI5:
+ 332              		.cfi_restore 4
+ 333              		.cfi_def_cfa_offset 0
+ 334 004e 7047     		bx	lr
+ 335              	.L46:
+  71:BSP/WS2812.c  **** 	{
+ 336              		.loc 1 71 58 is_stmt 1 view .LVU93
+  71:BSP/WS2812.c  **** 	{
+ 337              		.loc 1 71 59 is_stmt 0 view .LVU94
+ 338 0050 0131     		adds	r1, r1, #1
+ 339              	.LVL21:
+ 340              	.L38:
+  71:BSP/WS2812.c  **** 	{
+ 341              		.loc 1 71 29 is_stmt 1 view .LVU95
+  71:BSP/WS2812.c  **** 	{
+ 342              		.loc 1 71 2 is_stmt 0 view .LVU96
+ 343 0052 B1F5A87F 		cmp	r1, #336
+ 344 0056 04D8     		bhi	.L45
+  73:BSP/WS2812.c  **** 		{
+ 345              		.loc 1 73 8 view .LVU97
+ 346 0058 0023     		movs	r3, #0
+ 347              	.LVL22:
+  73:BSP/WS2812.c  **** 		{
+ 348              		.loc 1 73 11 is_stmt 1 view .LVU98
+  73:BSP/WS2812.c  **** 		{
+ 349              		.loc 1 73 3 is_stmt 0 view .LVU99
+ 350 005a 172B     		cmp	r3, #23
+ 351 005c F8D8     		bhi	.L46
+  69:BSP/WS2812.c  **** 	uint32_t i,j;
+ 352              		.loc 1 69 1 view .LVU100
+ 353 005e 10B4     		push	{r4}
+ 354              	.LCFI6:
+ 355              		.cfi_def_cfa_offset 4
+ 356              		.cfi_offset 4, -4
+ 357 0060 DCE7     		b	.L34
+ 358              	.LVL23:
+ 359              	.L45:
+ 360              	.LCFI7:
+ 361              		.cfi_def_cfa_offset 0
+ 362              		.cfi_restore 4
+  69:BSP/WS2812.c  **** 	uint32_t i,j;
+ 363              		.loc 1 69 1 view .LVU101
+ 364 0062 7047     		bx	lr
+ 365              	.L48:
+ 366              		.align	2
+ 367              	.L47:
+ 368 0064 00000000 		.word	WS2812B_Bit
+ 369 0068 00000000 		.word	.LANCHOR0
+ 370              		.cfi_endproc
+ 371              	.LFE71:
+ 373              		.section	.text.WS2812B_ClearBuf,"ax",%progbits
+ 374              		.align	1
+ 375              		.global	WS2812B_ClearBuf
+ 376              		.syntax unified
+ 377              		.thumb
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 10
+
+
+ 378              		.thumb_func
+ 380              	WS2812B_ClearBuf:
+ 381              	.LFB72:
+  81:BSP/WS2812.c  **** 
+  82:BSP/WS2812.c  **** 
+  83:BSP/WS2812.c  **** /*
+  84:BSP/WS2812.c  **** *µÆ°å
+  85:BSP/WS2812.c  **** *
+  86:BSP/WS2812.c  **** **/
+  87:BSP/WS2812.c  **** void WS2812B_ClearBuf(void)//ËùÓÐÊý¾ÝÇåÁã£¬¹ØµÆ
+  88:BSP/WS2812.c  **** {
+ 382              		.loc 1 88 1 is_stmt 1 view -0
+ 383              		.cfi_startproc
+ 384              		@ args = 0, pretend = 0, frame = 0
+ 385              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386              		@ link register save eliminated.
+  89:BSP/WS2812.c  **** 	uint32_t i;
+ 387              		.loc 1 89 2 view .LVU103
+  90:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 388              		.loc 1 90 2 view .LVU104
+ 389              	.LVL24:
+ 390              		.loc 1 90 7 is_stmt 0 view .LVU105
+ 391 0000 0023     		movs	r3, #0
+ 392              		.loc 1 90 2 view .LVU106
+ 393 0002 04E0     		b	.L50
+ 394              	.LVL25:
+ 395              	.L51:
+  91:BSP/WS2812.c  **** 	{
+  92:BSP/WS2812.c  **** 		WS2812B_Buf[i]=0x000000;
+ 396              		.loc 1 92 3 is_stmt 1 discriminator 3 view .LVU107
+ 397              		.loc 1 92 17 is_stmt 0 discriminator 3 view .LVU108
+ 398 0004 034A     		ldr	r2, .L52
+ 399 0006 0021     		movs	r1, #0
+ 400 0008 42F82310 		str	r1, [r2, r3, lsl #2]
+  90:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 401              		.loc 1 90 33 is_stmt 1 discriminator 3 view .LVU109
+  90:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 402              		.loc 1 90 34 is_stmt 0 discriminator 3 view .LVU110
+ 403 000c 0133     		adds	r3, r3, #1
+ 404              	.LVL26:
+ 405              	.L50:
+  90:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 406              		.loc 1 90 10 is_stmt 1 discriminator 1 view .LVU111
+  90:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 407              		.loc 1 90 2 is_stmt 0 discriminator 1 view .LVU112
+ 408 000e AE2B     		cmp	r3, #174
+ 409 0010 F8D9     		bls	.L51
+  93:BSP/WS2812.c  **** 	}
+  94:BSP/WS2812.c  **** }
+ 410              		.loc 1 94 1 view .LVU113
+ 411 0012 7047     		bx	lr
+ 412              	.L53:
+ 413              		.align	2
+ 414              	.L52:
+ 415 0014 00000000 		.word	.LANCHOR0
+ 416              		.cfi_endproc
+ 417              	.LFE72:
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 11
+
+
+ 419              		.section	.text.WS2812B_SetBuf,"ax",%progbits
+ 420              		.align	1
+ 421              		.global	WS2812B_SetBuf
+ 422              		.syntax unified
+ 423              		.thumb
+ 424              		.thumb_func
+ 426              	WS2812B_SetBuf:
+ 427              	.LVL27:
+ 428              	.LFB73:
+  95:BSP/WS2812.c  **** 
+  96:BSP/WS2812.c  **** /*
+  97:BSP/WS2812.c  **** *µÆ°å
+  98:BSP/WS2812.c  **** *
+  99:BSP/WS2812.c  **** **/
+ 100:BSP/WS2812.c  **** void WS2812B_SetBuf(uint32_t Color)//ÉèÖÃµÆµÄÑÕÉ«
+ 101:BSP/WS2812.c  **** {
+ 429              		.loc 1 101 1 is_stmt 1 view -0
+ 430              		.cfi_startproc
+ 431              		@ args = 0, pretend = 0, frame = 0
+ 432              		@ frame_needed = 0, uses_anonymous_args = 0
+ 433              		@ link register save eliminated.
+ 102:BSP/WS2812.c  **** 	uint32_t i;
+ 434              		.loc 1 102 2 view .LVU115
+ 103:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 435              		.loc 1 103 2 view .LVU116
+ 436              		.loc 1 103 7 is_stmt 0 view .LVU117
+ 437 0000 0023     		movs	r3, #0
+ 438              		.loc 1 103 2 view .LVU118
+ 439 0002 03E0     		b	.L55
+ 440              	.LVL28:
+ 441              	.L56:
+ 104:BSP/WS2812.c  **** 	{
+ 105:BSP/WS2812.c  **** 		WS2812B_Buf[i]=Color;
+ 442              		.loc 1 105 3 is_stmt 1 discriminator 3 view .LVU119
+ 443              		.loc 1 105 17 is_stmt 0 discriminator 3 view .LVU120
+ 444 0004 034A     		ldr	r2, .L57
+ 445 0006 42F82300 		str	r0, [r2, r3, lsl #2]
+ 103:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 446              		.loc 1 103 33 is_stmt 1 discriminator 3 view .LVU121
+ 103:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 447              		.loc 1 103 34 is_stmt 0 discriminator 3 view .LVU122
+ 448 000a 0133     		adds	r3, r3, #1
+ 449              	.LVL29:
+ 450              	.L55:
+ 103:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 451              		.loc 1 103 10 is_stmt 1 discriminator 1 view .LVU123
+ 103:BSP/WS2812.c  **** 	for(i=0;i<WS2812B_LED_QUANTITY;i++)
+ 452              		.loc 1 103 2 is_stmt 0 discriminator 1 view .LVU124
+ 453 000c AE2B     		cmp	r3, #174
+ 454 000e F9D9     		bls	.L56
+ 106:BSP/WS2812.c  **** 	}
+ 107:BSP/WS2812.c  **** }
+ 455              		.loc 1 107 1 view .LVU125
+ 456 0010 7047     		bx	lr
+ 457              	.L58:
+ 458 0012 00BF     		.align	2
+ 459              	.L57:
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 12
+
+
+ 460 0014 00000000 		.word	.LANCHOR0
+ 461              		.cfi_endproc
+ 462              	.LFE73:
+ 464              		.section	.text.WS2812B_UpdateBuf,"ax",%progbits
+ 465              		.align	1
+ 466              		.global	WS2812B_UpdateBuf
+ 467              		.syntax unified
+ 468              		.thumb
+ 469              		.thumb_func
+ 471              	WS2812B_UpdateBuf:
+ 472              	.LFB74:
+ 108:BSP/WS2812.c  **** 
+ 109:BSP/WS2812.c  **** /*
+ 110:BSP/WS2812.c  **** *µÆ°å
+ 111:BSP/WS2812.c  **** *
+ 112:BSP/WS2812.c  **** **/
+ 113:BSP/WS2812.c  **** void WS2812B_UpdateBuf(void)//½«ÉèÖÃºÃµÄÑÕÉ«Ð´Èëµ½µÆÀïÃæ£¬ÈÃËüÁÁ
+ 114:BSP/WS2812.c  **** {
+ 473              		.loc 1 114 1 is_stmt 1 view -0
+ 474              		.cfi_startproc
+ 475              		@ args = 0, pretend = 0, frame = 0
+ 476              		@ frame_needed = 0, uses_anonymous_args = 0
+ 477              		@ link register save eliminated.
+ 115:BSP/WS2812.c  **** 	uint32_t i,j;
+ 478              		.loc 1 115 2 view .LVU127
+ 116:BSP/WS2812.c  **** 	for(j=0;j<WS2812B_LED_QUANTITY;j++)
+ 479              		.loc 1 116 2 view .LVU128
+ 480              	.LVL30:
+ 481              		.loc 1 116 7 is_stmt 0 view .LVU129
+ 482 0000 0021     		movs	r1, #0
+ 483              		.loc 1 116 2 view .LVU130
+ 484 0002 25E0     		b	.L67
+ 485              	.LVL31:
+ 486              	.L61:
+ 487              	.LCFI8:
+ 488              		.cfi_def_cfa_offset 4
+ 489              		.cfi_offset 4, -4
+ 117:BSP/WS2812.c  **** 	{
+ 118:BSP/WS2812.c  **** 		for(i=0;i<24;i++)
+ 119:BSP/WS2812.c  **** 		{
+ 120:BSP/WS2812.c  **** 			if(WS2812B_Buf[j]&(0x800000>>i)){WS2812B_Bit[j*24+i+1]=45;}  //BITÎ»Îª1 ÉèÖÃÏàÓ¦µÄÕ¼¿Õ±È
+ 121:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 490              		.loc 1 121 9 is_stmt 1 view .LVU131
+ 491              		.loc 1 121 22 is_stmt 0 view .LVU132
+ 492 0004 01EB4100 		add	r0, r1, r1, lsl #1
+ 493 0008 C200     		lsls	r2, r0, #3
+ 494              		.loc 1 121 25 view .LVU133
+ 495 000a 1A44     		add	r2, r2, r3
+ 496              		.loc 1 121 27 view .LVU134
+ 497 000c 0132     		adds	r2, r2, #1
+ 498              		.loc 1 121 30 view .LVU135
+ 499 000e 1448     		ldr	r0, .L76
+ 500 0010 1924     		movs	r4, #25
+ 501 0012 40F82240 		str	r4, [r0, r2, lsl #2]
+ 502              	.L62:
+ 118:BSP/WS2812.c  **** 		{
+ 503              		.loc 1 118 16 is_stmt 1 discriminator 2 view .LVU136
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 13
+
+
+ 118:BSP/WS2812.c  **** 		{
+ 504              		.loc 1 118 17 is_stmt 0 discriminator 2 view .LVU137
+ 505 0016 0133     		adds	r3, r3, #1
+ 506              	.LVL32:
+ 507              	.L64:
+ 118:BSP/WS2812.c  **** 		{
+ 508              		.loc 1 118 11 is_stmt 1 discriminator 1 view .LVU138
+ 118:BSP/WS2812.c  **** 		{
+ 509              		.loc 1 118 3 is_stmt 0 discriminator 1 view .LVU139
+ 510 0018 172B     		cmp	r3, #23
+ 511 001a 11D8     		bhi	.L72
+ 512              	.L63:
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 513              		.loc 1 120 4 is_stmt 1 view .LVU140
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 514              		.loc 1 120 18 is_stmt 0 view .LVU141
+ 515 001c 114A     		ldr	r2, .L76+4
+ 516 001e 52F82100 		ldr	r0, [r2, r1, lsl #2]
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 517              		.loc 1 120 31 view .LVU142
+ 518 0022 4FF40002 		mov	r2, #8388608
+ 519 0026 1A41     		asrs	r2, r2, r3
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 520              		.loc 1 120 6 view .LVU143
+ 521 0028 1042     		tst	r0, r2
+ 522 002a EBD0     		beq	.L61
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 523              		.loc 1 120 37 is_stmt 1 discriminator 1 view .LVU144
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 524              		.loc 1 120 50 is_stmt 0 discriminator 1 view .LVU145
+ 525 002c 01EB4100 		add	r0, r1, r1, lsl #1
+ 526 0030 C200     		lsls	r2, r0, #3
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 527              		.loc 1 120 53 discriminator 1 view .LVU146
+ 528 0032 1A44     		add	r2, r2, r3
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 529              		.loc 1 120 55 discriminator 1 view .LVU147
+ 530 0034 0132     		adds	r2, r2, #1
+ 120:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 531              		.loc 1 120 58 discriminator 1 view .LVU148
+ 532 0036 0A48     		ldr	r0, .L76
+ 533 0038 2D24     		movs	r4, #45
+ 534 003a 40F82240 		str	r4, [r0, r2, lsl #2]
+ 535 003e EAE7     		b	.L62
+ 536              	.L72:
+ 116:BSP/WS2812.c  **** 	{
+ 537              		.loc 1 116 33 is_stmt 1 discriminator 2 view .LVU149
+ 116:BSP/WS2812.c  **** 	{
+ 538              		.loc 1 116 34 is_stmt 0 discriminator 2 view .LVU150
+ 539 0040 0131     		adds	r1, r1, #1
+ 540              	.LVL33:
+ 116:BSP/WS2812.c  **** 	{
+ 541              		.loc 1 116 10 is_stmt 1 discriminator 2 view .LVU151
+ 116:BSP/WS2812.c  **** 	{
+ 542              		.loc 1 116 2 is_stmt 0 discriminator 2 view .LVU152
+ 543 0042 AE29     		cmp	r1, #174
+ 544 0044 01D8     		bhi	.L73
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 14
+
+
+ 118:BSP/WS2812.c  **** 		{
+ 545              		.loc 1 118 8 view .LVU153
+ 546 0046 0023     		movs	r3, #0
+ 547              	.LVL34:
+ 118:BSP/WS2812.c  **** 		{
+ 548              		.loc 1 118 8 view .LVU154
+ 549 0048 E6E7     		b	.L64
+ 550              	.LVL35:
+ 551              	.L73:
+ 122:BSP/WS2812.c  **** 		}
+ 123:BSP/WS2812.c  **** 	}
+ 124:BSP/WS2812.c  **** 	
+ 125:BSP/WS2812.c  **** ////´«Êä
+ 126:BSP/WS2812.c  **** //	HAL_TIM_PWM_Start_DMA(&htim4,TIM_CHANNEL_1,&WS2812B_Bit[0],24*WS2812B_LED_QUANTITY+1);
+ 127:BSP/WS2812.c  **** //	
+ 128:BSP/WS2812.c  **** //	HAL_TIM_PWM_Start_DMA(&htim1,TIM_CHANNEL_1,&WS2812B_Bit[0],24*WS2812B_LED_QUANTITY+1);
+ 129:BSP/WS2812.c  **** //	
+ 130:BSP/WS2812.c  **** //	HAL_TIM_PWM_Start_DMA(&htim3,TIM_CHANNEL_4,&WS2812B_Bit[0],24*WS2812B_LED_QUANTITY+1);
+ 131:BSP/WS2812.c  **** //	
+ 132:BSP/WS2812.c  **** //	HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,&WS2812B_Bit[0],24*WS2812B_LED_QUANTITY+1);
+ 133:BSP/WS2812.c  **** //	
+ 134:BSP/WS2812.c  **** //	HAL_TIM_PWM_Start_DMA(&htim5,TIM_CHANNEL_1,&WS2812B_Bit[0],24*WS2812B_LED_QUANTITY+1);
+ 135:BSP/WS2812.c  **** 
+ 136:BSP/WS2812.c  **** }
+ 552              		.loc 1 136 1 view .LVU155
+ 553 004a 10BC     		pop	{r4}
+ 554              	.LCFI9:
+ 555              		.cfi_restore 4
+ 556              		.cfi_def_cfa_offset 0
+ 557 004c 7047     		bx	lr
+ 558              	.L75:
+ 116:BSP/WS2812.c  **** 	{
+ 559              		.loc 1 116 33 is_stmt 1 view .LVU156
+ 116:BSP/WS2812.c  **** 	{
+ 560              		.loc 1 116 34 is_stmt 0 view .LVU157
+ 561 004e 0131     		adds	r1, r1, #1
+ 562              	.LVL36:
+ 563              	.L67:
+ 116:BSP/WS2812.c  **** 	{
+ 564              		.loc 1 116 10 is_stmt 1 view .LVU158
+ 116:BSP/WS2812.c  **** 	{
+ 565              		.loc 1 116 2 is_stmt 0 view .LVU159
+ 566 0050 AE29     		cmp	r1, #174
+ 567 0052 04D8     		bhi	.L74
+ 118:BSP/WS2812.c  **** 		{
+ 568              		.loc 1 118 8 view .LVU160
+ 569 0054 0023     		movs	r3, #0
+ 570              	.LVL37:
+ 118:BSP/WS2812.c  **** 		{
+ 571              		.loc 1 118 11 is_stmt 1 view .LVU161
+ 118:BSP/WS2812.c  **** 		{
+ 572              		.loc 1 118 3 is_stmt 0 view .LVU162
+ 573 0056 172B     		cmp	r3, #23
+ 574 0058 F9D8     		bhi	.L75
+ 114:BSP/WS2812.c  **** 	uint32_t i,j;
+ 575              		.loc 1 114 1 view .LVU163
+ 576 005a 10B4     		push	{r4}
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 15
+
+
+ 577              	.LCFI10:
+ 578              		.cfi_def_cfa_offset 4
+ 579              		.cfi_offset 4, -4
+ 580 005c DEE7     		b	.L63
+ 581              	.LVL38:
+ 582              	.L74:
+ 583              	.LCFI11:
+ 584              		.cfi_def_cfa_offset 0
+ 585              		.cfi_restore 4
+ 114:BSP/WS2812.c  **** 	uint32_t i,j;
+ 586              		.loc 1 114 1 view .LVU164
+ 587 005e 7047     		bx	lr
+ 588              	.L77:
+ 589              		.align	2
+ 590              	.L76:
+ 591 0060 00000000 		.word	WS2812B_Bit
+ 592 0064 00000000 		.word	.LANCHOR0
+ 593              		.cfi_endproc
+ 594              	.LFE74:
+ 596              		.section	.text.HAL_TIM_PWM_PulseFinishedCallback,"ax",%progbits
+ 597              		.align	1
+ 598              		.global	HAL_TIM_PWM_PulseFinishedCallback
+ 599              		.syntax unified
+ 600              		.thumb
+ 601              		.thumb_func
+ 603              	HAL_TIM_PWM_PulseFinishedCallback:
+ 604              	.LVL39:
+ 605              	.LFB75:
+ 137:BSP/WS2812.c  **** 
+ 138:BSP/WS2812.c  **** void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)//PWMÐÅºÅ´«ÊäÍê³É»Øµ÷º¯Êý£¬¸Ãº¯Êý·Ç³
+ 139:BSP/WS2812.c  **** {
+ 606              		.loc 1 139 1 is_stmt 1 view -0
+ 607              		.cfi_startproc
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              		.loc 1 139 1 is_stmt 0 view .LVU166
+ 611 0000 10B5     		push	{r4, lr}
+ 612              	.LCFI12:
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 4, -8
+ 615              		.cfi_offset 14, -4
+ 616 0002 0446     		mov	r4, r0
+ 140:BSP/WS2812.c  **** 	if(htim == &htim4 )
+ 617              		.loc 1 140 2 is_stmt 1 view .LVU167
+ 618              		.loc 1 140 4 is_stmt 0 view .LVU168
+ 619 0004 1F4B     		ldr	r3, .L92
+ 620 0006 9842     		cmp	r0, r3
+ 621 0008 0FD0     		beq	.L86
+ 622              	.LVL40:
+ 623              	.L79:
+ 141:BSP/WS2812.c  **** 	{
+ 142:BSP/WS2812.c  **** 	//ºã¶¨ÊäÈë¸ßµçÆ½
+ 143:BSP/WS2812.c  **** 	__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_1,0);//PB6
+ 144:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim4, TIM_CHANNEL_1);
+ 145:BSP/WS2812.c  **** 	}
+ 146:BSP/WS2812.c  **** 	
+ 147:BSP/WS2812.c  **** 	if(htim == &htim1)
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 16
+
+
+ 624              		.loc 1 147 2 is_stmt 1 view .LVU169
+ 625              		.loc 1 147 4 is_stmt 0 view .LVU170
+ 626 000a 1F4B     		ldr	r3, .L92+4
+ 627 000c 9C42     		cmp	r4, r3
+ 628 000e 13D0     		beq	.L87
+ 629              	.L80:
+ 148:BSP/WS2812.c  **** 	{
+ 149:BSP/WS2812.c  **** 	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);//PA8
+ 150:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim1, TIM_CHANNEL_1);
+ 151:BSP/WS2812.c  **** 	}
+ 152:BSP/WS2812.c  **** 	
+ 153:BSP/WS2812.c  **** 	if(htim == &htim2)
+ 630              		.loc 1 153 2 is_stmt 1 view .LVU171
+ 631              		.loc 1 153 4 is_stmt 0 view .LVU172
+ 632 0010 1E4B     		ldr	r3, .L92+8
+ 633 0012 9C42     		cmp	r4, r3
+ 634 0014 17D0     		beq	.L88
+ 635              	.L81:
+ 154:BSP/WS2812.c  **** 	{
+ 155:BSP/WS2812.c  **** 	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,0);//PA15
+ 156:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim2, TIM_CHANNEL_1);
+ 157:BSP/WS2812.c  **** 	}
+ 158:BSP/WS2812.c  **** 	
+ 159:BSP/WS2812.c  **** 	if(htim == &htim3)
+ 636              		.loc 1 159 2 is_stmt 1 view .LVU173
+ 637              		.loc 1 159 4 is_stmt 0 view .LVU174
+ 638 0016 1E4B     		ldr	r3, .L92+12
+ 639 0018 9C42     		cmp	r4, r3
+ 640 001a 1BD0     		beq	.L89
+ 641              	.L82:
+ 160:BSP/WS2812.c  **** 	{
+ 161:BSP/WS2812.c  **** 	__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);//PB1
+ 162:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim3, TIM_CHANNEL_4);
+ 163:BSP/WS2812.c  **** 	}
+ 164:BSP/WS2812.c  **** 	
+ 165:BSP/WS2812.c  **** 	if(htim == &htim5)
+ 642              		.loc 1 165 2 is_stmt 1 view .LVU175
+ 643              		.loc 1 165 4 is_stmt 0 view .LVU176
+ 644 001c 1D4B     		ldr	r3, .L92+16
+ 645 001e 9C42     		cmp	r4, r3
+ 646 0020 20D0     		beq	.L90
+ 647              	.L83:
+ 166:BSP/WS2812.c  **** 	{
+ 167:BSP/WS2812.c  **** 	__HAL_TIM_SET_COMPARE(&htim5,TIM_CHANNEL_1,0);//PA0
+ 168:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim5, TIM_CHANNEL_1);
+ 169:BSP/WS2812.c  **** 		
+ 170:BSP/WS2812.c  **** 	}
+ 171:BSP/WS2812.c  **** 	
+ 172:BSP/WS2812.c  **** 	if(htim == &htim8)
+ 648              		.loc 1 172 2 is_stmt 1 view .LVU177
+ 649              		.loc 1 172 4 is_stmt 0 view .LVU178
+ 650 0022 1D4B     		ldr	r3, .L92+20
+ 651 0024 9C42     		cmp	r4, r3
+ 652 0026 24D0     		beq	.L91
+ 653              	.L78:
+ 173:BSP/WS2812.c  **** 	{
+ 174:BSP/WS2812.c  **** 	
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 17
+
+
+ 175:BSP/WS2812.c  **** 		__HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_3,0);//PA0
+ 176:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim8, TIM_CHANNEL_3);
+ 177:BSP/WS2812.c  **** 		
+ 178:BSP/WS2812.c  **** 	}
+ 179:BSP/WS2812.c  **** }//Í£Ö¹DMA²¢¸´Î»£¬×¢ÒâSTM32F1µÄ¶àÂ·DMAÐèÒªÖÐ¶Ï»Øµ÷£¬²¢ÇÒDMA·¢ËÍÄ£Ê½Ó¦¸ÃÊÇÑ­»·
+ 654              		.loc 1 179 1 view .LVU179
+ 655 0028 10BD     		pop	{r4, pc}
+ 656              	.LVL41:
+ 657              	.L86:
+ 143:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim4, TIM_CHANNEL_1);
+ 658              		.loc 1 143 2 is_stmt 1 view .LVU180
+ 659 002a 1846     		mov	r0, r3
+ 660              	.LVL42:
+ 143:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim4, TIM_CHANNEL_1);
+ 661              		.loc 1 143 2 is_stmt 0 view .LVU181
+ 662 002c 1B68     		ldr	r3, [r3]
+ 663 002e 0021     		movs	r1, #0
+ 664 0030 5963     		str	r1, [r3, #52]
+ 144:BSP/WS2812.c  **** 	}
+ 665              		.loc 1 144 4 is_stmt 1 view .LVU182
+ 666 0032 FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 667              	.LVL43:
+ 668 0036 E8E7     		b	.L79
+ 669              	.L87:
+ 149:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim1, TIM_CHANNEL_1);
+ 670              		.loc 1 149 2 view .LVU183
+ 671 0038 1846     		mov	r0, r3
+ 672 003a 1B68     		ldr	r3, [r3]
+ 673 003c 0021     		movs	r1, #0
+ 674 003e 5963     		str	r1, [r3, #52]
+ 150:BSP/WS2812.c  **** 	}
+ 675              		.loc 1 150 4 view .LVU184
+ 676 0040 FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 677              	.LVL44:
+ 678 0044 E4E7     		b	.L80
+ 679              	.L88:
+ 155:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim2, TIM_CHANNEL_1);
+ 680              		.loc 1 155 2 view .LVU185
+ 681 0046 1846     		mov	r0, r3
+ 682 0048 1B68     		ldr	r3, [r3]
+ 683 004a 0021     		movs	r1, #0
+ 684 004c 5963     		str	r1, [r3, #52]
+ 156:BSP/WS2812.c  **** 	}
+ 685              		.loc 1 156 4 view .LVU186
+ 686 004e FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 687              	.LVL45:
+ 688 0052 E0E7     		b	.L81
+ 689              	.L89:
+ 161:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim3, TIM_CHANNEL_4);
+ 690              		.loc 1 161 2 view .LVU187
+ 691 0054 1846     		mov	r0, r3
+ 692 0056 1B68     		ldr	r3, [r3]
+ 693 0058 0022     		movs	r2, #0
+ 694 005a 1A64     		str	r2, [r3, #64]
+ 162:BSP/WS2812.c  **** 	}
+ 695              		.loc 1 162 4 view .LVU188
+ 696 005c 0C21     		movs	r1, #12
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 18
+
+
+ 697 005e FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 698              	.LVL46:
+ 699 0062 DBE7     		b	.L82
+ 700              	.L90:
+ 167:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim5, TIM_CHANNEL_1);
+ 701              		.loc 1 167 2 view .LVU189
+ 702 0064 1846     		mov	r0, r3
+ 703 0066 1B68     		ldr	r3, [r3]
+ 704 0068 0021     		movs	r1, #0
+ 705 006a 5963     		str	r1, [r3, #52]
+ 168:BSP/WS2812.c  **** 		
+ 706              		.loc 1 168 4 view .LVU190
+ 707 006c FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 708              	.LVL47:
+ 709 0070 D7E7     		b	.L83
+ 710              	.L91:
+ 175:BSP/WS2812.c  ****    HAL_TIM_PWM_Stop_DMA(&htim8, TIM_CHANNEL_3);
+ 711              		.loc 1 175 3 view .LVU191
+ 712 0072 1846     		mov	r0, r3
+ 713 0074 1B68     		ldr	r3, [r3]
+ 714 0076 0022     		movs	r2, #0
+ 715 0078 DA63     		str	r2, [r3, #60]
+ 176:BSP/WS2812.c  **** 		
+ 716              		.loc 1 176 4 view .LVU192
+ 717 007a 0821     		movs	r1, #8
+ 718 007c FFF7FEFF 		bl	HAL_TIM_PWM_Stop_DMA
+ 719              	.LVL48:
+ 720              		.loc 1 179 1 is_stmt 0 view .LVU193
+ 721 0080 D2E7     		b	.L78
+ 722              	.L93:
+ 723 0082 00BF     		.align	2
+ 724              	.L92:
+ 725 0084 00000000 		.word	htim4
+ 726 0088 00000000 		.word	htim1
+ 727 008c 00000000 		.word	htim2
+ 728 0090 00000000 		.word	htim3
+ 729 0094 00000000 		.word	htim5
+ 730 0098 00000000 		.word	htim8
+ 731              		.cfi_endproc
+ 732              	.LFE75:
+ 734              		.section	.text.Arror,"ax",%progbits
+ 735              		.align	1
+ 736              		.global	Arror
+ 737              		.syntax unified
+ 738              		.thumb
+ 739              		.thumb_func
+ 741              	Arror:
+ 742              	.LVL49:
+ 743              	.LFB76:
+ 180:BSP/WS2812.c  **** 
+ 181:BSP/WS2812.c  **** 
+ 182:BSP/WS2812.c  **** 
+ 183:BSP/WS2812.c  **** void Arror(int station,int Step,int Color)
+ 184:BSP/WS2812.c  **** {
+ 744              		.loc 1 184 1 is_stmt 1 view -0
+ 745              		.cfi_startproc
+ 746              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 19
+
+
+ 747              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185:BSP/WS2812.c  **** 	int i,j, k, number;
+ 748              		.loc 1 185 2 view .LVU195
+ 186:BSP/WS2812.c  **** 	int location1,location2;
+ 749              		.loc 1 186 2 view .LVU196
+ 187:BSP/WS2812.c  **** 	int new1;
+ 750              		.loc 1 187 2 view .LVU197
+ 188:BSP/WS2812.c  **** 	for(i=0;i<6;i++)
+ 751              		.loc 1 188 2 view .LVU198
+ 752              		.loc 1 188 7 is_stmt 0 view .LVU199
+ 753 0000 4FF0000C 		mov	ip, #0
+ 754              	.LVL50:
+ 755              		.loc 1 188 10 is_stmt 1 view .LVU200
+ 756              		.loc 1 188 2 is_stmt 0 view .LVU201
+ 757 0004 BCF1050F 		cmp	ip, #5
+ 758 0008 44DC     		bgt	.L110
+ 184:BSP/WS2812.c  **** 	int i,j, k, number;
+ 759              		.loc 1 184 1 view .LVU202
+ 760 000a 70B5     		push	{r4, r5, r6, lr}
+ 761              	.LCFI13:
+ 762              		.cfi_def_cfa_offset 16
+ 763              		.cfi_offset 4, -16
+ 764              		.cfi_offset 5, -12
+ 765              		.cfi_offset 6, -8
+ 766              		.cfi_offset 14, -4
+ 767 000c 38E0     		b	.L104
+ 768              	.LVL51:
+ 769              	.L98:
+ 189:BSP/WS2812.c  **** 	{
+ 190:BSP/WS2812.c  **** 		if(i<3)
+ 191:BSP/WS2812.c  **** 		{
+ 192:BSP/WS2812.c  **** 			for(j=0;j<=i;j++)
+ 193:BSP/WS2812.c  **** 			{
+ 194:BSP/WS2812.c  **** 				location1 = j + i * 7 +Step*7 + station*7;
+ 195:BSP/WS2812.c  **** 				if(location1>237)
+ 196:BSP/WS2812.c  **** 				{
+ 197:BSP/WS2812.c  **** 					location1 = location1 -238;
+ 198:BSP/WS2812.c  **** 				}
+ 199:BSP/WS2812.c  **** 				location2 = location1 + (6-2*j);
+ 770              		.loc 1 199 5 is_stmt 1 discriminator 2 view .LVU203
+ 771              		.loc 1 199 31 is_stmt 0 discriminator 2 view .LVU204
+ 772 000e CEF10304 		rsb	r4, lr, #3
+ 773              		.loc 1 199 15 discriminator 2 view .LVU205
+ 774 0012 03EB4404 		add	r4, r3, r4, lsl #1
+ 775              	.LVL52:
+ 200:BSP/WS2812.c  **** 				WS2812B_Buf[location1]=Color;
+ 776              		.loc 1 200 5 is_stmt 1 discriminator 2 view .LVU206
+ 777              		.loc 1 200 27 is_stmt 0 discriminator 2 view .LVU207
+ 778 0016 204D     		ldr	r5, .L112
+ 779 0018 45F82320 		str	r2, [r5, r3, lsl #2]
+ 201:BSP/WS2812.c  **** 				WS2812B_Buf[location2]=Color;
+ 780              		.loc 1 201 5 is_stmt 1 discriminator 2 view .LVU208
+ 781              		.loc 1 201 27 is_stmt 0 discriminator 2 view .LVU209
+ 782 001c 45F82420 		str	r2, [r5, r4, lsl #2]
+ 192:BSP/WS2812.c  **** 			{
+ 783              		.loc 1 192 17 is_stmt 1 discriminator 2 view .LVU210
+ 192:BSP/WS2812.c  **** 			{
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 20
+
+
+ 784              		.loc 1 192 18 is_stmt 0 discriminator 2 view .LVU211
+ 785 0020 0EF1010E 		add	lr, lr, #1
+ 786              	.LVL53:
+ 787              	.L96:
+ 192:BSP/WS2812.c  **** 			{
+ 788              		.loc 1 192 12 is_stmt 1 discriminator 1 view .LVU212
+ 192:BSP/WS2812.c  **** 			{
+ 789              		.loc 1 192 4 is_stmt 0 discriminator 1 view .LVU213
+ 790 0024 F445     		cmp	ip, lr
+ 791 0026 26DB     		blt	.L100
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 792              		.loc 1 194 5 is_stmt 1 view .LVU214
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 793              		.loc 1 194 23 is_stmt 0 view .LVU215
+ 794 0028 CCEBCC03 		rsb	r3, ip, ip, lsl #3
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 795              		.loc 1 194 19 view .LVU216
+ 796 002c 7344     		add	r3, r3, lr
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 797              		.loc 1 194 32 view .LVU217
+ 798 002e C1EBC104 		rsb	r4, r1, r1, lsl #3
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 799              		.loc 1 194 27 view .LVU218
+ 800 0032 2344     		add	r3, r3, r4
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 801              		.loc 1 194 44 view .LVU219
+ 802 0034 C0EBC004 		rsb	r4, r0, r0, lsl #3
+ 194:BSP/WS2812.c  **** 				if(location1>237)
+ 803              		.loc 1 194 15 view .LVU220
+ 804 0038 2344     		add	r3, r3, r4
+ 805              	.LVL54:
+ 195:BSP/WS2812.c  **** 				{
+ 806              		.loc 1 195 5 is_stmt 1 view .LVU221
+ 195:BSP/WS2812.c  **** 				{
+ 807              		.loc 1 195 7 is_stmt 0 view .LVU222
+ 808 003a ED2B     		cmp	r3, #237
+ 809 003c E7DD     		ble	.L98
+ 197:BSP/WS2812.c  **** 				}
+ 810              		.loc 1 197 6 is_stmt 1 view .LVU223
+ 197:BSP/WS2812.c  **** 				}
+ 811              		.loc 1 197 16 is_stmt 0 view .LVU224
+ 812 003e EE3B     		subs	r3, r3, #238
+ 813              	.LVL55:
+ 197:BSP/WS2812.c  **** 				}
+ 814              		.loc 1 197 16 view .LVU225
+ 815 0040 E5E7     		b	.L98
+ 816              	.LVL56:
+ 817              	.L105:
+ 192:BSP/WS2812.c  **** 			{
+ 818              		.loc 1 192 9 view .LVU226
+ 819 0042 4FF0000E 		mov	lr, #0
+ 820 0046 EDE7     		b	.L96
+ 821              	.LVL57:
+ 822              	.L102:
+ 202:BSP/WS2812.c  **** 			}
+ 203:BSP/WS2812.c  **** 		}
+ 204:BSP/WS2812.c  **** 		else
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 21
+
+
+ 205:BSP/WS2812.c  **** 		{
+ 206:BSP/WS2812.c  **** 				number = (i - 2) * 2;
+ 207:BSP/WS2812.c  **** 				for (k = 0; k < (7 - number); k++) 
+ 208:BSP/WS2812.c  **** 				{
+ 209:BSP/WS2812.c  **** 					new1 = i * 7 + k + (number / 2)+Step*7+station*7;
+ 210:BSP/WS2812.c  **** 					if(new1>237)
+ 211:BSP/WS2812.c  **** 					{
+ 212:BSP/WS2812.c  **** 						new1=new1-238;
+ 213:BSP/WS2812.c  **** 					}
+ 214:BSP/WS2812.c  **** 					WS2812B_Buf[new1]=Color;
+ 823              		.loc 1 214 6 is_stmt 1 discriminator 2 view .LVU227
+ 824              		.loc 1 214 23 is_stmt 0 discriminator 2 view .LVU228
+ 825 0048 134C     		ldr	r4, .L112
+ 826 004a 44F82320 		str	r2, [r4, r3, lsl #2]
+ 207:BSP/WS2812.c  **** 				{
+ 827              		.loc 1 207 35 is_stmt 1 discriminator 2 view .LVU229
+ 207:BSP/WS2812.c  **** 				{
+ 828              		.loc 1 207 36 is_stmt 0 discriminator 2 view .LVU230
+ 829 004e 0EF1010E 		add	lr, lr, #1
+ 830              	.LVL58:
+ 831              	.L101:
+ 207:BSP/WS2812.c  **** 				{
+ 832              		.loc 1 207 17 is_stmt 1 discriminator 1 view .LVU231
+ 207:BSP/WS2812.c  **** 				{
+ 833              		.loc 1 207 24 is_stmt 0 discriminator 1 view .LVU232
+ 834 0052 C5F10703 		rsb	r3, r5, #7
+ 207:BSP/WS2812.c  **** 				{
+ 835              		.loc 1 207 5 discriminator 1 view .LVU233
+ 836 0056 7345     		cmp	r3, lr
+ 837 0058 0DDD     		ble	.L100
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 838              		.loc 1 209 6 is_stmt 1 view .LVU234
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 839              		.loc 1 209 15 is_stmt 0 view .LVU235
+ 840 005a CCEBCC03 		rsb	r3, ip, ip, lsl #3
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 841              		.loc 1 209 19 view .LVU236
+ 842 005e 7344     		add	r3, r3, lr
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 843              		.loc 1 209 23 view .LVU237
+ 844 0060 3344     		add	r3, r3, r6
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 845              		.loc 1 209 42 view .LVU238
+ 846 0062 C1EBC104 		rsb	r4, r1, r1, lsl #3
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 847              		.loc 1 209 37 view .LVU239
+ 848 0066 2344     		add	r3, r3, r4
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 849              		.loc 1 209 52 view .LVU240
+ 850 0068 C0EBC004 		rsb	r4, r0, r0, lsl #3
+ 209:BSP/WS2812.c  **** 					if(new1>237)
+ 851              		.loc 1 209 11 view .LVU241
+ 852 006c 2344     		add	r3, r3, r4
+ 853              	.LVL59:
+ 210:BSP/WS2812.c  **** 					{
+ 854              		.loc 1 210 6 is_stmt 1 view .LVU242
+ 210:BSP/WS2812.c  **** 					{
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 22
+
+
+ 855              		.loc 1 210 8 is_stmt 0 view .LVU243
+ 856 006e ED2B     		cmp	r3, #237
+ 857 0070 EADD     		ble	.L102
+ 212:BSP/WS2812.c  **** 					}
+ 858              		.loc 1 212 7 is_stmt 1 view .LVU244
+ 212:BSP/WS2812.c  **** 					}
+ 859              		.loc 1 212 11 is_stmt 0 view .LVU245
+ 860 0072 EE3B     		subs	r3, r3, #238
+ 861              	.LVL60:
+ 212:BSP/WS2812.c  **** 					}
+ 862              		.loc 1 212 11 view .LVU246
+ 863 0074 E8E7     		b	.L102
+ 864              	.LVL61:
+ 865              	.L100:
+ 188:BSP/WS2812.c  **** 	{
+ 866              		.loc 1 188 14 is_stmt 1 discriminator 2 view .LVU247
+ 188:BSP/WS2812.c  **** 	{
+ 867              		.loc 1 188 15 is_stmt 0 discriminator 2 view .LVU248
+ 868 0076 0CF1010C 		add	ip, ip, #1
+ 869              	.LVL62:
+ 188:BSP/WS2812.c  **** 	{
+ 870              		.loc 1 188 10 is_stmt 1 discriminator 2 view .LVU249
+ 188:BSP/WS2812.c  **** 	{
+ 871              		.loc 1 188 2 is_stmt 0 discriminator 2 view .LVU250
+ 872 007a BCF1050F 		cmp	ip, #5
+ 873 007e 08DC     		bgt	.L111
+ 874              	.L104:
+ 190:BSP/WS2812.c  **** 		{
+ 875              		.loc 1 190 3 is_stmt 1 view .LVU251
+ 190:BSP/WS2812.c  **** 		{
+ 876              		.loc 1 190 5 is_stmt 0 view .LVU252
+ 877 0080 BCF1020F 		cmp	ip, #2
+ 878 0084 DDDD     		ble	.L105
+ 206:BSP/WS2812.c  **** 				for (k = 0; k < (7 - number); k++) 
+ 879              		.loc 1 206 5 is_stmt 1 view .LVU253
+ 206:BSP/WS2812.c  **** 				for (k = 0; k < (7 - number); k++) 
+ 880              		.loc 1 206 17 is_stmt 0 view .LVU254
+ 881 0086 ACF10206 		sub	r6, ip, #2
+ 206:BSP/WS2812.c  **** 				for (k = 0; k < (7 - number); k++) 
+ 882              		.loc 1 206 12 view .LVU255
+ 883 008a 7500     		lsls	r5, r6, #1
+ 884              	.LVL63:
+ 207:BSP/WS2812.c  **** 				{
+ 885              		.loc 1 207 5 is_stmt 1 view .LVU256
+ 207:BSP/WS2812.c  **** 				{
+ 886              		.loc 1 207 12 is_stmt 0 view .LVU257
+ 887 008c 4FF0000E 		mov	lr, #0
+ 207:BSP/WS2812.c  **** 				{
+ 888              		.loc 1 207 5 view .LVU258
+ 889 0090 DFE7     		b	.L101
+ 890              	.LVL64:
+ 891              	.L111:
+ 215:BSP/WS2812.c  **** 				}
+ 216:BSP/WS2812.c  **** 		}
+ 217:BSP/WS2812.c  **** 	}
+ 218:BSP/WS2812.c  **** }
+ 892              		.loc 1 218 1 view .LVU259
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 23
+
+
+ 893 0092 70BD     		pop	{r4, r5, r6, pc}
+ 894              	.L110:
+ 895              	.LCFI14:
+ 896              		.cfi_def_cfa_offset 0
+ 897              		.cfi_restore 4
+ 898              		.cfi_restore 5
+ 899              		.cfi_restore 6
+ 900              		.cfi_restore 14
+ 901              		.loc 1 218 1 view .LVU260
+ 902 0094 7047     		bx	lr
+ 903              	.L113:
+ 904 0096 00BF     		.align	2
+ 905              	.L112:
+ 906 0098 00000000 		.word	.LANCHOR0
+ 907              		.cfi_endproc
+ 908              	.LFE76:
+ 910              		.section	.text.Scroll_pattern,"ax",%progbits
+ 911              		.align	1
+ 912              		.global	Scroll_pattern
+ 913              		.syntax unified
+ 914              		.thumb
+ 915              		.thumb_func
+ 917              	Scroll_pattern:
+ 918              	.LVL65:
+ 919              	.LFB77:
+ 219:BSP/WS2812.c  **** 
+ 220:BSP/WS2812.c  **** 
+ 221:BSP/WS2812.c  **** void Scroll_pattern(int time,int Scolor,int lStep)
+ 222:BSP/WS2812.c  **** {
+ 920              		.loc 1 222 1 is_stmt 1 view -0
+ 921              		.cfi_startproc
+ 922              		@ args = 0, pretend = 0, frame = 0
+ 923              		@ frame_needed = 0, uses_anonymous_args = 0
+ 924              		.loc 1 222 1 is_stmt 0 view .LVU262
+ 925 0000 70B5     		push	{r4, r5, r6, lr}
+ 926              	.LCFI15:
+ 927              		.cfi_def_cfa_offset 16
+ 928              		.cfi_offset 4, -16
+ 929              		.cfi_offset 5, -12
+ 930              		.cfi_offset 6, -8
+ 931              		.cfi_offset 14, -4
+ 932 0002 0646     		mov	r6, r0
+ 933 0004 0D46     		mov	r5, r1
+ 934 0006 1446     		mov	r4, r2
+ 223:BSP/WS2812.c  **** 		Arror(0,lStep,Scolor);
+ 935              		.loc 1 223 3 is_stmt 1 view .LVU263
+ 936 0008 0A46     		mov	r2, r1
+ 937              	.LVL66:
+ 938              		.loc 1 223 3 is_stmt 0 view .LVU264
+ 939 000a 2146     		mov	r1, r4
+ 940              	.LVL67:
+ 941              		.loc 1 223 3 view .LVU265
+ 942 000c 0020     		movs	r0, #0
+ 943              	.LVL68:
+ 944              		.loc 1 223 3 view .LVU266
+ 945 000e FFF7FEFF 		bl	Arror
+ 946              	.LVL69:
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 24
+
+
+ 224:BSP/WS2812.c  **** 		Arror(5,lStep,Scolor);
+ 947              		.loc 1 224 3 is_stmt 1 view .LVU267
+ 948 0012 2A46     		mov	r2, r5
+ 949 0014 2146     		mov	r1, r4
+ 950 0016 0520     		movs	r0, #5
+ 951 0018 FFF7FEFF 		bl	Arror
+ 952              	.LVL70:
+ 225:BSP/WS2812.c  **** 		Arror(10,lStep,Scolor);
+ 953              		.loc 1 225 3 view .LVU268
+ 954 001c 2A46     		mov	r2, r5
+ 955 001e 2146     		mov	r1, r4
+ 956 0020 0A20     		movs	r0, #10
+ 957 0022 FFF7FEFF 		bl	Arror
+ 958              	.LVL71:
+ 226:BSP/WS2812.c  **** 		Arror(15,lStep,Scolor);
+ 959              		.loc 1 226 3 view .LVU269
+ 960 0026 2A46     		mov	r2, r5
+ 961 0028 2146     		mov	r1, r4
+ 962 002a 0F20     		movs	r0, #15
+ 963 002c FFF7FEFF 		bl	Arror
+ 964              	.LVL72:
+ 227:BSP/WS2812.c  **** 		Arror(20,lStep,Scolor);
+ 965              		.loc 1 227 3 view .LVU270
+ 966 0030 2A46     		mov	r2, r5
+ 967 0032 2146     		mov	r1, r4
+ 968 0034 1420     		movs	r0, #20
+ 969 0036 FFF7FEFF 		bl	Arror
+ 970              	.LVL73:
+ 228:BSP/WS2812.c  **** 		Arror(25,lStep,Scolor);
+ 971              		.loc 1 228 3 view .LVU271
+ 972 003a 2A46     		mov	r2, r5
+ 973 003c 2146     		mov	r1, r4
+ 974 003e 1920     		movs	r0, #25
+ 975 0040 FFF7FEFF 		bl	Arror
+ 976              	.LVL74:
+ 229:BSP/WS2812.c  **** 		Arror(30,lStep,Scolor);	
+ 977              		.loc 1 229 3 view .LVU272
+ 978 0044 2A46     		mov	r2, r5
+ 979 0046 2146     		mov	r1, r4
+ 980 0048 1E20     		movs	r0, #30
+ 981 004a FFF7FEFF 		bl	Arror
+ 982              	.LVL75:
+ 230:BSP/WS2812.c  **** 		WS2812B_UpdateBuf();
+ 983              		.loc 1 230 3 view .LVU273
+ 984 004e FFF7FEFF 		bl	WS2812B_UpdateBuf
+ 985              	.LVL76:
+ 231:BSP/WS2812.c  **** 		HAL_Delay(time);//¸´Î»ÐÅºÅ
+ 986              		.loc 1 231 3 view .LVU274
+ 987 0052 3046     		mov	r0, r6
+ 988 0054 FFF7FEFF 		bl	HAL_Delay
+ 989              	.LVL77:
+ 232:BSP/WS2812.c  **** 		WS2812B_ClearBuf();
+ 990              		.loc 1 232 3 view .LVU275
+ 991 0058 FFF7FEFF 		bl	WS2812B_ClearBuf
+ 992              	.LVL78:
+ 233:BSP/WS2812.c  **** 		WS2812B_UpdateBuf();
+ 993              		.loc 1 233 3 view .LVU276
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 25
+
+
+ 994 005c FFF7FEFF 		bl	WS2812B_UpdateBuf
+ 995              	.LVL79:
+ 234:BSP/WS2812.c  **** //		lStep = lStep+2;
+ 235:BSP/WS2812.c  **** //		if(lStep == 34){
+ 236:BSP/WS2812.c  **** //			lStep = 0;
+ 237:BSP/WS2812.c  **** //		}
+ 238:BSP/WS2812.c  **** //	
+ 239:BSP/WS2812.c  **** }
+ 996              		.loc 1 239 1 is_stmt 0 view .LVU277
+ 997 0060 70BD     		pop	{r4, r5, r6, pc}
+ 998              		.loc 1 239 1 view .LVU278
+ 999              		.cfi_endproc
+ 1000              	.LFE77:
+ 1002              		.section	.text.ALL_UpdateBuf,"ax",%progbits
+ 1003              		.align	1
+ 1004              		.global	ALL_UpdateBuf
+ 1005              		.syntax unified
+ 1006              		.thumb
+ 1007              		.thumb_func
+ 1009              	ALL_UpdateBuf:
+ 1010              	.LFB78:
+ 240:BSP/WS2812.c  **** 
+ 241:BSP/WS2812.c  **** 
+ 242:BSP/WS2812.c  **** /*
+ 243:BSP/WS2812.c  **** *
+ 244:BSP/WS2812.c  **** *×Ü¸³Öµ
+ 245:BSP/WS2812.c  **** *
+ 246:BSP/WS2812.c  **** **/
+ 247:BSP/WS2812.c  **** void ALL_UpdateBuf(void)
+ 248:BSP/WS2812.c  **** {
+ 1011              		.loc 1 248 1 is_stmt 1 view -0
+ 1012              		.cfi_startproc
+ 1013              		@ args = 0, pretend = 0, frame = 0
+ 1014              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1015              		@ link register save eliminated.
+ 249:BSP/WS2812.c  **** 	uint32_t i,j;
+ 1016              		.loc 1 249 2 view .LVU280
+ 250:BSP/WS2812.c  **** 	for(j=0;j<All_Number;j++)
+ 1017              		.loc 1 250 2 view .LVU281
+ 1018              	.LVL80:
+ 1019              		.loc 1 250 7 is_stmt 0 view .LVU282
+ 1020 0000 0021     		movs	r1, #0
+ 1021              		.loc 1 250 2 view .LVU283
+ 1022 0002 26E0     		b	.L124
+ 1023              	.LVL81:
+ 1024              	.L118:
+ 1025              	.LCFI16:
+ 1026              		.cfi_def_cfa_offset 4
+ 1027              		.cfi_offset 4, -4
+ 251:BSP/WS2812.c  **** 	{
+ 252:BSP/WS2812.c  **** 		for(i=0;i<24;i++)
+ 253:BSP/WS2812.c  **** 		{
+ 254:BSP/WS2812.c  **** 			if(WS2812B_Buf[j]&(0x800000>>i)){WS2812B_Bit[j*24+i+1]=45;}  //BITÎ»Îª1 ÉèÖÃÏàÓ¦µÄÕ¼¿Õ±È
+ 255:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1028              		.loc 1 255 9 is_stmt 1 view .LVU284
+ 1029              		.loc 1 255 22 is_stmt 0 view .LVU285
+ 1030 0004 01EB4100 		add	r0, r1, r1, lsl #1
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 26
+
+
+ 1031 0008 C200     		lsls	r2, r0, #3
+ 1032              		.loc 1 255 25 view .LVU286
+ 1033 000a 1A44     		add	r2, r2, r3
+ 1034              		.loc 1 255 27 view .LVU287
+ 1035 000c 0132     		adds	r2, r2, #1
+ 1036              		.loc 1 255 30 view .LVU288
+ 1037 000e 1548     		ldr	r0, .L133
+ 1038 0010 1924     		movs	r4, #25
+ 1039 0012 40F82240 		str	r4, [r0, r2, lsl #2]
+ 1040              	.L119:
+ 252:BSP/WS2812.c  **** 		{
+ 1041              		.loc 1 252 16 is_stmt 1 discriminator 2 view .LVU289
+ 252:BSP/WS2812.c  **** 		{
+ 1042              		.loc 1 252 17 is_stmt 0 discriminator 2 view .LVU290
+ 1043 0016 0133     		adds	r3, r3, #1
+ 1044              	.LVL82:
+ 1045              	.L121:
+ 252:BSP/WS2812.c  **** 		{
+ 1046              		.loc 1 252 11 is_stmt 1 discriminator 1 view .LVU291
+ 252:BSP/WS2812.c  **** 		{
+ 1047              		.loc 1 252 3 is_stmt 0 discriminator 1 view .LVU292
+ 1048 0018 172B     		cmp	r3, #23
+ 1049 001a 11D8     		bhi	.L129
+ 1050              	.L120:
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1051              		.loc 1 254 4 is_stmt 1 view .LVU293
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1052              		.loc 1 254 18 is_stmt 0 view .LVU294
+ 1053 001c 124A     		ldr	r2, .L133+4
+ 1054 001e 52F82100 		ldr	r0, [r2, r1, lsl #2]
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1055              		.loc 1 254 31 view .LVU295
+ 1056 0022 4FF40002 		mov	r2, #8388608
+ 1057 0026 1A41     		asrs	r2, r2, r3
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1058              		.loc 1 254 6 view .LVU296
+ 1059 0028 1042     		tst	r0, r2
+ 1060 002a EBD0     		beq	.L118
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1061              		.loc 1 254 37 is_stmt 1 discriminator 1 view .LVU297
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1062              		.loc 1 254 50 is_stmt 0 discriminator 1 view .LVU298
+ 1063 002c 01EB4100 		add	r0, r1, r1, lsl #1
+ 1064 0030 C200     		lsls	r2, r0, #3
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1065              		.loc 1 254 53 discriminator 1 view .LVU299
+ 1066 0032 1A44     		add	r2, r2, r3
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1067              		.loc 1 254 55 discriminator 1 view .LVU300
+ 1068 0034 0132     		adds	r2, r2, #1
+ 254:BSP/WS2812.c  **** 			else{WS2812B_Bit[j*24+i+1]=25;}
+ 1069              		.loc 1 254 58 discriminator 1 view .LVU301
+ 1070 0036 0B48     		ldr	r0, .L133
+ 1071 0038 2D24     		movs	r4, #45
+ 1072 003a 40F82240 		str	r4, [r0, r2, lsl #2]
+ 1073 003e EAE7     		b	.L119
+ 1074              	.L129:
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 27
+
+
+ 250:BSP/WS2812.c  **** 	{
+ 1075              		.loc 1 250 23 is_stmt 1 discriminator 2 view .LVU302
+ 250:BSP/WS2812.c  **** 	{
+ 1076              		.loc 1 250 24 is_stmt 0 discriminator 2 view .LVU303
+ 1077 0040 0131     		adds	r1, r1, #1
+ 1078              	.LVL83:
+ 250:BSP/WS2812.c  **** 	{
+ 1079              		.loc 1 250 10 is_stmt 1 discriminator 2 view .LVU304
+ 250:BSP/WS2812.c  **** 	{
+ 1080              		.loc 1 250 2 is_stmt 0 discriminator 2 view .LVU305
+ 1081 0042 B1F5C87F 		cmp	r1, #400
+ 1082 0046 01D8     		bhi	.L130
+ 252:BSP/WS2812.c  **** 		{
+ 1083              		.loc 1 252 8 view .LVU306
+ 1084 0048 0023     		movs	r3, #0
+ 1085              	.LVL84:
+ 252:BSP/WS2812.c  **** 		{
+ 1086              		.loc 1 252 8 view .LVU307
+ 1087 004a E5E7     		b	.L121
+ 1088              	.LVL85:
+ 1089              	.L130:
+ 256:BSP/WS2812.c  **** 		}
+ 257:BSP/WS2812.c  **** 	}
+ 258:BSP/WS2812.c  **** }	
+ 1090              		.loc 1 258 1 view .LVU308
+ 1091 004c 10BC     		pop	{r4}
+ 1092              	.LCFI17:
+ 1093              		.cfi_restore 4
+ 1094              		.cfi_def_cfa_offset 0
+ 1095 004e 7047     		bx	lr
+ 1096              	.L132:
+ 250:BSP/WS2812.c  **** 	{
+ 1097              		.loc 1 250 23 is_stmt 1 view .LVU309
+ 250:BSP/WS2812.c  **** 	{
+ 1098              		.loc 1 250 24 is_stmt 0 view .LVU310
+ 1099 0050 0131     		adds	r1, r1, #1
+ 1100              	.LVL86:
+ 1101              	.L124:
+ 250:BSP/WS2812.c  **** 	{
+ 1102              		.loc 1 250 10 is_stmt 1 view .LVU311
+ 250:BSP/WS2812.c  **** 	{
+ 1103              		.loc 1 250 2 is_stmt 0 view .LVU312
+ 1104 0052 B1F5C87F 		cmp	r1, #400
+ 1105 0056 04D8     		bhi	.L131
+ 252:BSP/WS2812.c  **** 		{
+ 1106              		.loc 1 252 8 view .LVU313
+ 1107 0058 0023     		movs	r3, #0
+ 1108              	.LVL87:
+ 252:BSP/WS2812.c  **** 		{
+ 1109              		.loc 1 252 11 is_stmt 1 view .LVU314
+ 252:BSP/WS2812.c  **** 		{
+ 1110              		.loc 1 252 3 is_stmt 0 view .LVU315
+ 1111 005a 172B     		cmp	r3, #23
+ 1112 005c F8D8     		bhi	.L132
+ 248:BSP/WS2812.c  **** 	uint32_t i,j;
+ 1113              		.loc 1 248 1 view .LVU316
+ 1114 005e 10B4     		push	{r4}
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 28
+
+
+ 1115              	.LCFI18:
+ 1116              		.cfi_def_cfa_offset 4
+ 1117              		.cfi_offset 4, -4
+ 1118 0060 DCE7     		b	.L120
+ 1119              	.LVL88:
+ 1120              	.L131:
+ 1121              	.LCFI19:
+ 1122              		.cfi_def_cfa_offset 0
+ 1123              		.cfi_restore 4
+ 248:BSP/WS2812.c  **** 	uint32_t i,j;
+ 1124              		.loc 1 248 1 view .LVU317
+ 1125 0062 7047     		bx	lr
+ 1126              	.L134:
+ 1127              		.align	2
+ 1128              	.L133:
+ 1129 0064 00000000 		.word	WS2812B_Bit
+ 1130 0068 00000000 		.word	.LANCHOR0
+ 1131              		.cfi_endproc
+ 1132              	.LFE78:
+ 1134              		.section	.text.ALL_SetBuf,"ax",%progbits
+ 1135              		.align	1
+ 1136              		.global	ALL_SetBuf
+ 1137              		.syntax unified
+ 1138              		.thumb
+ 1139              		.thumb_func
+ 1141              	ALL_SetBuf:
+ 1142              	.LFB79:
+ 259:BSP/WS2812.c  **** 
+ 260:BSP/WS2812.c  **** void ALL_SetBuf(void)
+ 261:BSP/WS2812.c  **** {
+ 1143              		.loc 1 261 1 is_stmt 1 view -0
+ 1144              		.cfi_startproc
+ 1145              		@ args = 0, pretend = 0, frame = 0
+ 1146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1147              		@ link register save eliminated.
+ 262:BSP/WS2812.c  **** 
+ 263:BSP/WS2812.c  **** 	uint32_t i;
+ 1148              		.loc 1 263 2 view .LVU319
+ 264:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1149              		.loc 1 264 2 view .LVU320
+ 1150              	.LVL89:
+ 1151              		.loc 1 264 7 is_stmt 0 view .LVU321
+ 1152 0000 0023     		movs	r3, #0
+ 1153              		.loc 1 264 2 view .LVU322
+ 1154 0002 05E0     		b	.L136
+ 1155              	.LVL90:
+ 1156              	.L137:
+ 265:BSP/WS2812.c  **** 	{
+ 266:BSP/WS2812.c  **** 		WS2812B_Buf[i]=0x00ff00;
+ 1157              		.loc 1 266 3 is_stmt 1 discriminator 3 view .LVU323
+ 1158              		.loc 1 266 17 is_stmt 0 discriminator 3 view .LVU324
+ 1159 0004 044A     		ldr	r2, .L138
+ 1160 0006 4FF47F41 		mov	r1, #65280
+ 1161 000a 42F82310 		str	r1, [r2, r3, lsl #2]
+ 264:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1162              		.loc 1 264 23 is_stmt 1 discriminator 3 view .LVU325
+ 264:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 29
+
+
+ 1163              		.loc 1 264 24 is_stmt 0 discriminator 3 view .LVU326
+ 1164 000e 0133     		adds	r3, r3, #1
+ 1165              	.LVL91:
+ 1166              	.L136:
+ 264:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1167              		.loc 1 264 10 is_stmt 1 discriminator 1 view .LVU327
+ 264:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1168              		.loc 1 264 2 is_stmt 0 discriminator 1 view .LVU328
+ 1169 0010 B3F5C87F 		cmp	r3, #400
+ 1170 0014 F6D9     		bls	.L137
+ 267:BSP/WS2812.c  **** 	}
+ 268:BSP/WS2812.c  **** 
+ 269:BSP/WS2812.c  **** }
+ 1171              		.loc 1 269 1 view .LVU329
+ 1172 0016 7047     		bx	lr
+ 1173              	.L139:
+ 1174              		.align	2
+ 1175              	.L138:
+ 1176 0018 00000000 		.word	.LANCHOR0
+ 1177              		.cfi_endproc
+ 1178              	.LFE79:
+ 1180              		.section	.text.ALL_ClearBuf,"ax",%progbits
+ 1181              		.align	1
+ 1182              		.global	ALL_ClearBuf
+ 1183              		.syntax unified
+ 1184              		.thumb
+ 1185              		.thumb_func
+ 1187              	ALL_ClearBuf:
+ 1188              	.LFB80:
+ 270:BSP/WS2812.c  **** 
+ 271:BSP/WS2812.c  **** void ALL_ClearBuf(void)
+ 272:BSP/WS2812.c  **** {
+ 1189              		.loc 1 272 1 is_stmt 1 view -0
+ 1190              		.cfi_startproc
+ 1191              		@ args = 0, pretend = 0, frame = 0
+ 1192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1193              		@ link register save eliminated.
+ 273:BSP/WS2812.c  **** 	uint32_t i;
+ 1194              		.loc 1 273 2 view .LVU331
+ 274:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1195              		.loc 1 274 2 view .LVU332
+ 1196              	.LVL92:
+ 1197              		.loc 1 274 7 is_stmt 0 view .LVU333
+ 1198 0000 0023     		movs	r3, #0
+ 1199              		.loc 1 274 2 view .LVU334
+ 1200 0002 04E0     		b	.L141
+ 1201              	.LVL93:
+ 1202              	.L142:
+ 275:BSP/WS2812.c  **** 	{
+ 276:BSP/WS2812.c  **** 		WS2812B_Buf[i]=0x000000;
+ 1203              		.loc 1 276 3 is_stmt 1 discriminator 3 view .LVU335
+ 1204              		.loc 1 276 17 is_stmt 0 discriminator 3 view .LVU336
+ 1205 0004 044A     		ldr	r2, .L143
+ 1206 0006 0021     		movs	r1, #0
+ 1207 0008 42F82310 		str	r1, [r2, r3, lsl #2]
+ 274:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1208              		.loc 1 274 23 is_stmt 1 discriminator 3 view .LVU337
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 30
+
+
+ 274:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1209              		.loc 1 274 24 is_stmt 0 discriminator 3 view .LVU338
+ 1210 000c 0133     		adds	r3, r3, #1
+ 1211              	.LVL94:
+ 1212              	.L141:
+ 274:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1213              		.loc 1 274 10 is_stmt 1 discriminator 1 view .LVU339
+ 274:BSP/WS2812.c  **** 	for(i=0;i<All_Number;i++)
+ 1214              		.loc 1 274 2 is_stmt 0 discriminator 1 view .LVU340
+ 1215 000e B3F5C87F 		cmp	r3, #400
+ 1216 0012 F7D9     		bls	.L142
+ 277:BSP/WS2812.c  **** 	}
+ 278:BSP/WS2812.c  **** 
+ 279:BSP/WS2812.c  **** }...
+ 1217              		.loc 1 279 1 view .LVU341
+ 1218 0014 7047     		bx	lr
+ 1219              	.L144:
+ 1220 0016 00BF     		.align	2
+ 1221              	.L143:
+ 1222 0018 00000000 		.word	.LANCHOR0
+ 1223              		.cfi_endproc
+ 1224              	.LFE80:
+ 1226              		.global	tim5_flag
+ 1227              		.global	WS2812B_Flag
+ 1228              		.global	WS2812B_Bit
+ 1229              		.global	WS2812B_Buf
+ 1230              		.section	.bss.WS2812B_Bit,"aw",%nobits
+ 1231              		.align	2
+ 1234              	WS2812B_Bit:
+ 1235 0000 00000000 		.space	38500
+ 1235      00000000 
+ 1235      00000000 
+ 1235      00000000 
+ 1235      00000000 
+ 1236              		.section	.bss.WS2812B_Buf,"aw",%nobits
+ 1237              		.align	2
+ 1238              		.set	.LANCHOR0,. + 0
+ 1241              	WS2812B_Buf:
+ 1242 0000 00000000 		.space	1604
+ 1242      00000000 
+ 1242      00000000 
+ 1242      00000000 
+ 1242      00000000 
+ 1243              		.section	.bss.WS2812B_Flag,"aw",%nobits
+ 1246              	WS2812B_Flag:
+ 1247 0000 00       		.space	1
+ 1248              		.section	.bss.tim5_flag,"aw",%nobits
+ 1249              		.align	2
+ 1252              	tim5_flag:
+ 1253 0000 00000000 		.space	4
+ 1254              		.text
+ 1255              	.Letext0:
+ 1256              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 1257              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 1258              		.file 4 "BSP/ws2812.h"
+ 1259              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 1260              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 31
+
+
+ 1261              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1262              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 1263              		.file 9 "Core/Inc/tim.h"
+ 1264              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 WS2812.c
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:18     .text.LINE_UpdateBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:24     .text.LINE_UpdateBuf:00000000 LINE_UpdateBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:145    .text.LINE_UpdateBuf:00000068 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1234   .bss.WS2812B_Bit:00000000 WS2812B_Bit
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:151    .text.LINE_SetBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:157    .text.LINE_SetBuf:00000000 LINE_SetBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:191    .text.LINE_SetBuf:00000018 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:196    .text.OUT_ClearBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:202    .text.OUT_ClearBuf:00000000 OUT_ClearBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:237    .text.OUT_ClearBuf:00000018 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:242    .text.OUT_UpdateBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:248    .text.OUT_UpdateBuf:00000000 OUT_UpdateBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:368    .text.OUT_UpdateBuf:00000064 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:374    .text.WS2812B_ClearBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:380    .text.WS2812B_ClearBuf:00000000 WS2812B_ClearBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:415    .text.WS2812B_ClearBuf:00000014 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:420    .text.WS2812B_SetBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:426    .text.WS2812B_SetBuf:00000000 WS2812B_SetBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:460    .text.WS2812B_SetBuf:00000014 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:465    .text.WS2812B_UpdateBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:471    .text.WS2812B_UpdateBuf:00000000 WS2812B_UpdateBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:591    .text.WS2812B_UpdateBuf:00000060 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:597    .text.HAL_TIM_PWM_PulseFinishedCallback:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:603    .text.HAL_TIM_PWM_PulseFinishedCallback:00000000 HAL_TIM_PWM_PulseFinishedCallback
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:725    .text.HAL_TIM_PWM_PulseFinishedCallback:00000084 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:735    .text.Arror:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:741    .text.Arror:00000000 Arror
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:906    .text.Arror:00000098 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:911    .text.Scroll_pattern:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:917    .text.Scroll_pattern:00000000 Scroll_pattern
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1003   .text.ALL_UpdateBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1009   .text.ALL_UpdateBuf:00000000 ALL_UpdateBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1129   .text.ALL_UpdateBuf:00000064 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1135   .text.ALL_SetBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1141   .text.ALL_SetBuf:00000000 ALL_SetBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1176   .text.ALL_SetBuf:00000018 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1181   .text.ALL_ClearBuf:00000000 $t
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1187   .text.ALL_ClearBuf:00000000 ALL_ClearBuf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1222   .text.ALL_ClearBuf:00000018 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1252   .bss.tim5_flag:00000000 tim5_flag
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1246   .bss.WS2812B_Flag:00000000 WS2812B_Flag
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1241   .bss.WS2812B_Buf:00000000 WS2812B_Buf
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1231   .bss.WS2812B_Bit:00000000 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1237   .bss.WS2812B_Buf:00000000 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1247   .bss.WS2812B_Flag:00000000 $d
+C:\Users\21945\AppData\Local\Temp\cced2lyb.s:1249   .bss.tim5_flag:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_TIM_PWM_Stop_DMA
+htim4
+htim1
+htim2
+htim3
+htim5
+htim8
+ARM GAS  C:\Users\21945\AppData\Local\Temp\cced2lyb.s 			page 33
+
+
+HAL_Delay

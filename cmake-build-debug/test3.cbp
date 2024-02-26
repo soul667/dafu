@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="test3"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test3.elf">
+				<Option output="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/test3.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xE"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Inc"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/../../test3(5)/Drivers/CMSIS/Include"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/arm-none-eabi"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/backward"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/include"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/include-fixed"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 test3.elf"/>
+					<CompileFile command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test3.elf/fast">
+				<Option output="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/test3.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xE"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Inc"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/../../test3(5)/Drivers/CMSIS/Include"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/arm-none-eabi"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/backward"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/include"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/include-fixed"/>
+					<Add directory="c:\program files (x86)\gnu arm embedded toolchain\10 2021.10\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 test3.elf/fast"/>
+					<CompileFile command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/SoftWare/CLion 2023.3.2/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP/WS2812.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP/WS2812.h">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP/bsp_dwt.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/BSP/bsp_dwt.h">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys/ctr.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys/ctr.h">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys/vibra.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/ContrlSys/vibra.h">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/dma.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/gpio.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/main.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/stm32f1xx_hal_msp.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/stm32f1xx_hal_timebase_tim.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/stm32f1xx_it.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/syscalls.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/system_stm32f1xx.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Core/Src/tim.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/STM32F103RCTx_FLASH.ld">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/startup/startup_stm32f103xe.s">
+			<Option target="test3.elf"/>
+		</Unit>
+		<Unit filename="D:/Data/RM/diankongdaima/dafu/1/2/Energy organ body light board (2)/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

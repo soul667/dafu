@@ -1,0 +1,22 @@
+
+GraphedExpression="test000", DisplayFormat=DISPLAY_FORMAT_DEC, Color=#a00909
+OpenDocument="main.c", FilePath="D:/Data/RM/diankongdaima/dafu/1/Energy organ body light board/Core/Src/main.c", Line=71
+OpenDocument="stm32f1xx_hal_tim_ex.c", FilePath="D:/Data/RM/diankongdaima/dafu/1/Energy organ body light board/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c", Line=2010
+OpenDocument="stm32f1xx_it.c", FilePath="D:/Data/RM/diankongdaima/dafu/1/Energy organ body light board/Core/Src/stm32f1xx_it.c", Line=94
+OpenDocument="startup_stm32f103xe.s", FilePath="D:/Data/RM/diankongdaima/dafu/1/Energy organ body light board/startup/startup_stm32f103xe.s", Line=53
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=1, w=543, h=390, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=543, h=261, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Watched Data 1", DockArea=LEFT, x=0, y=0, w=671, h=652, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Data Sampling", DockArea=BOTTOM, x=1, y=0, w=312, h=258, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
+OpenWindow="Timeline", DockArea=BOTTOM, x=2, y=0, w=662, h=258, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=1, CodePaneShown=1, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="438;0", PowerGraphDrawAsPoints=0, PowerGraphLegendShown=1, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="399;0", CodeGraphLegendShown=1, CodeGraphLegendPosition="417;0"
+OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=944, h=258, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+TableHeader="Data Sampling Table", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";" test000"], ColWidths=[100;100;758]
+TableHeader="Data Sampling Setup", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Type";"Value";"Min";"Max";"Average";"# Changes";"Min. Change";"Max. Change"], ColWidths=[130;170;100;100;100;100;120;140;140]
+TableHeader="Power Sampling", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Description"], ColWidths=[100;118;364]
+TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh"], ColWidths=[247;183;173;100]
+TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
+TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[26;26;26;57]
+WatchedExpression="ES", Window=Watched Data 1
+WatchedExpression="test000", RefreshRate=5, Window=Watched Data 1
