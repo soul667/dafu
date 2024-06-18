@@ -1,7 +1,7 @@
 test3\ws2812.o: ..\BSP\WS2812.c
 test3\ws2812.o: ..\BSP\ws2812.h
-test3\ws2812.o: C:\Keil_v5\ARM\1111\Bin\..\include\stdint.h
-test3\ws2812.o: C:\Keil_v5\ARM\1111\Bin\..\include\stdio.h
+test3\ws2812.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stdint.h
+test3\ws2812.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stdio.h
 test3\ws2812.o: ../Core/Inc/dma.h
 test3\ws2812.o: ../Core/Inc/main.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
@@ -17,7 +17,7 @@ test3\ws2812.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 test3\ws2812.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-test3\ws2812.o: C:\Keil_v5\ARM\1111\Bin\..\include\stddef.h
+test3\ws2812.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stddef.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
@@ -33,5 +33,5 @@ test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 test3\ws2812.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 test3\ws2812.o: ../Core/Inc/tim.h
-test3\ws2812.o: C:\Keil_v5\ARM\1111\Bin\..\include\stdlib.h
+test3\ws2812.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stdlib.h
 test3\ws2812.o: ../ContrlSys/ctr.h

@@ -1,12 +1,15 @@
 {
     "files.associations": {
+        "*.md": "markdown",
+        "*.typ": "typst",
         "cmaster.h": "c",
         "stdlib.h": "c",
         "ws2812.h": "c",
         "time.h": "c",
         "stdio.h": "c",
         "cstdlib": "c",
-        "ctr.h": "c"
+        "ctr.h": "c",
+        "vector": "cpp"
     },
     "ros.distro": "foxy"
 }

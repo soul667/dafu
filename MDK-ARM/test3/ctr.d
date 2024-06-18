@@ -9,14 +9,14 @@ test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
 test3\ctr.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 test3\ctr.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h
 test3\ctr.o: ../Drivers/CMSIS/Include/core_cm3.h
-test3\ctr.o: C:\Keil_v5\ARM\1111\Bin\..\include\stdint.h
+test3\ctr.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stdint.h
 test3\ctr.o: ../Drivers/CMSIS/Include/cmsis_version.h
 test3\ctr.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 test3\ctr.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 test3\ctr.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-test3\ctr.o: C:\Keil_v5\ARM\1111\Bin\..\include\stddef.h
+test3\ctr.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stddef.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
@@ -33,6 +33,6 @@ test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 test3\ctr.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 test3\ctr.o: ../BSP/WS2812.h
 test3\ctr.o: ../Core/Inc/dma.h
-test3\ctr.o: C:\Keil_v5\ARM\1111\Bin\..\include\stdlib.h
+test3\ctr.o: C:\Keil_v5\ARM\ARM55\Bin\..\include\stdlib.h
 test3\ctr.o: ..\ContrlSys\vibra.h
 test3\ctr.o: ../BSP/bsp_dwt.h

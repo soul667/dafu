@@ -60,7 +60,8 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 int Step=1;
-uint32_t RGB1=0X00FF00; // color
+// GRB
+uint32_t RGB1=0X0000FF; // color
 /* USER CODE END 0 */
 
 /**
@@ -88,7 +89,9 @@ int main(void)
 
   /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
+  /* Initialize all configured periph
+	?
+	erals */
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM1_Init();
