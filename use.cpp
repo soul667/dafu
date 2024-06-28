@@ -2,16 +2,21 @@
 #include <vector>
 
 using namespace std;
-
+typedef enum{
+    LIGHT_ALL = 0,
+    NORMAL = 1,
+    DEBUG = 2
+}FanMode;
+int mode=NORMAL;
 void printArrow(int Step, int station, int Color) {
     vector<vector<char>> arrow(7, vector<char>(7, ' ')); // 创建一个 7x7 的二维数组表示箭头
 
     for (int w = 0; w < 7; w++) {
-        for (int i = 1; i < 6; i++) { // 0-》1
+        for (int i = 0; i < 6; i++) { // 0-》1
             int location1, location2, new1;
 
             if (i < 3) {
-                for (int j = 0; j <= i-1; j++) { // i to i-1
+                for (int j = 0; j <= i-2; j++) { // i to i-1
                     location1 = j + i * 7 + Step * 7 + station * 7;
                     location1 = (location1 > 237) ? location1 - 238 : location1;
                     location2 = location1 + (6 - 2 * j);
@@ -45,7 +50,7 @@ int main() {
     int station = 0;   // 箭头类型或方向（可根据需要调整）
     int Color = 1;     // 颜色（这里用 1 表示，实际中可根据 LED 颜色设置）
 
-    printArrow(Step, station, Color);
-
+     printArrow(Step, station, Color);
+    //if(mode==NORMAL) cout<<"11"<<endl;
     return 0;
 }

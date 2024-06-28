@@ -37,6 +37,7 @@ Section Cross References
     main.o(i.main) refers to tim.o(i.MX_TIM5_Init) for MX_TIM5_Init
     main.o(i.main) refers to tim.o(i.MX_TIM8_Init) for MX_TIM8_Init
     main.o(i.main) refers to ctr.o(i.boot_init) for boot_init
+    main.o(i.main) refers to ctr.o(i.Test) for Test
     main.o(i.main) refers to vibra.o(i.Vibra_monitor) for Vibra_monitor
     main.o(i.main) refers to ctr.o(i.fan_logic) for fan_logic
     main.o(i.main) refers to ctr.o(i.ctr_fan) for ctr_fan
@@ -561,7 +562,6 @@ Removing Unused input sections from the image.
     Removing ctr.o(.revsh_text), (4 bytes).
     Removing ctr.o(.rrx_text), (6 bytes).
     Removing ctr.o(i.MY_Delay), (44 bytes).
-    Removing ctr.o(i.Test), (76 bytes).
     Removing ctr.o(i.energyMachine_init), (48 bytes).
     Removing ctr.o(i.target_init), (64 bytes).
     Removing ctr.o(.data), (4 bytes).
@@ -882,7 +882,7 @@ Removing Unused input sections from the image.
     Removing ws2812.o(i.WS2812B_SetBuf), (10 bytes).
     Removing ws2812.o(i.ALL_SetBuf), (14 bytes).
 
-359 unused section(s) (total 23388 bytes) removed from the image.
+358 unused section(s) (total 23312 bytes) removed from the image.
 
 ==============================================================================
 
@@ -912,21 +912,21 @@ Image Symbol Table
     ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c 0x00000000   Number         0  stm32f1xx_hal_rcc_ex.o ABSOLUTE
     ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c 0x00000000   Number         0  stm32f1xx_hal_tim.o ABSOLUTE
     ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c 0x00000000   Number         0  stm32f1xx_hal_tim_ex.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
@@ -1064,39 +1064,40 @@ Image Symbol Table
     TIM_TI1_ConfigInputStage                 0x0800202d   Thumb Code    34  stm32f1xx_hal_tim.o(i.TIM_TI1_ConfigInputStage)
     i.TIM_TI2_ConfigInputStage               0x0800204e   Section        0  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
     TIM_TI2_ConfigInputStage                 0x0800204f   Thumb Code    36  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
-    i.UsageFault_Handler                     0x08002072   Section        0  stm32f1xx_it.o(i.UsageFault_Handler)
-    i.Vibra_monitor                          0x08002074   Section        0  vibra.o(i.Vibra_monitor)
-    i.__NVIC_SetPriority                     0x080020d0   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    __NVIC_SetPriority                       0x080020d1   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    i.__scatterload_copy                     0x080020f0   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x080020fe   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08002100   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.boot_init                              0x08002110   Section        0  ctr.o(i.boot_init)
-    i.close_all                              0x08002130   Section        0  ctr.o(i.close_all)
-    i.control_template_bit                   0x08002150   Section        0  ws2812.o(i.control_template_bit)
-    i.control_template_buff                  0x080021a0   Section        0  ws2812.o(i.control_template_buff)
-    i.ctr_fan                                0x080021b8   Section        0  ctr.o(i.ctr_fan)
-    i.draw_arrows                            0x0800234c   Section        0  ctr.o(i.draw_arrows)
-    i.fan_init                               0x08002404   Section        0  ctr.o(i.fan_init)
-    i.fan_list_init                          0x08002438   Section        0  ctr.o(i.fan_list_init)
-    i.fan_logic                              0x08002490   Section        0  ctr.o(i.fan_logic)
-    i.led_circle_Init                        0x08002564   Section        0  ctr.o(i.led_circle_Init)
-    i.light_flow                             0x08002584   Section        0  ctr.o(i.light_flow)
-    i.light_on                               0x080025a2   Section        0  ctr.o(i.light_on)
-    i.line_init                              0x080025de   Section        0  ctr.o(i.line_init)
-    i.main                                   0x08002604   Section        0  main.o(i.main)
-    i.vibra_init                             0x08002650   Section        0  vibra.o(i.vibra_init)
-    .constdata                               0x0800266c   Section       16  system_stm32f1xx_1.o(.constdata)
-    .data                                    0x20000000   Section        8  main.o(.data)
-    .data                                    0x20000008   Section       32  ws2812.o(.data)
-    .data                                    0x20000028   Section       56  ctr.o(.data)
-    .data                                    0x20000060   Section       12  stm32f1xx_hal.o(.data)
-    .data                                    0x2000006c   Section        4  system_stm32f1xx_1.o(.data)
-    .bss                                     0x20000070   Section      840  tim.o(.bss)
-    .bss                                     0x200003b8   Section    40104  ws2812.o(.bss)
-    .bss                                     0x2000a060   Section      100  ctr.o(.bss)
-    .bss                                     0x2000a0c4   Section       20  vibra.o(.bss)
-    STACK                                    0x2000a0d8   Section     1280  startup_stm32f103xe.o(STACK)
+    i.Test                                   0x08002074   Section        0  ctr.o(i.Test)
+    i.UsageFault_Handler                     0x080020c4   Section        0  stm32f1xx_it.o(i.UsageFault_Handler)
+    i.Vibra_monitor                          0x080020c8   Section        0  vibra.o(i.Vibra_monitor)
+    i.__NVIC_SetPriority                     0x08002120   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x08002121   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    i.__scatterload_copy                     0x08002140   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800214e   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x08002150   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.boot_init                              0x08002160   Section        0  ctr.o(i.boot_init)
+    i.close_all                              0x08002180   Section        0  ctr.o(i.close_all)
+    i.control_template_bit                   0x080021a0   Section        0  ws2812.o(i.control_template_bit)
+    i.control_template_buff                  0x080021f0   Section        0  ws2812.o(i.control_template_buff)
+    i.ctr_fan                                0x08002208   Section        0  ctr.o(i.ctr_fan)
+    i.draw_arrows                            0x0800239c   Section        0  ctr.o(i.draw_arrows)
+    i.fan_init                               0x08002458   Section        0  ctr.o(i.fan_init)
+    i.fan_list_init                          0x0800248c   Section        0  ctr.o(i.fan_list_init)
+    i.fan_logic                              0x080024e4   Section        0  ctr.o(i.fan_logic)
+    i.led_circle_Init                        0x080025b8   Section        0  ctr.o(i.led_circle_Init)
+    i.light_flow                             0x080025d8   Section        0  ctr.o(i.light_flow)
+    i.light_on                               0x080025f6   Section        0  ctr.o(i.light_on)
+    i.line_init                              0x08002632   Section        0  ctr.o(i.line_init)
+    i.main                                   0x08002658   Section        0  main.o(i.main)
+    i.vibra_init                             0x080026b4   Section        0  vibra.o(i.vibra_init)
+    .constdata                               0x080026d0   Section       16  system_stm32f1xx_1.o(.constdata)
+    .data                                    0x20000000   Section       16  main.o(.data)
+    .data                                    0x20000010   Section       32  ws2812.o(.data)
+    .data                                    0x20000030   Section       56  ctr.o(.data)
+    .data                                    0x20000068   Section       12  stm32f1xx_hal.o(.data)
+    .data                                    0x20000074   Section        4  system_stm32f1xx_1.o(.data)
+    .bss                                     0x20000078   Section      840  tim.o(.bss)
+    .bss                                     0x200003c0   Section    40104  ws2812.o(.bss)
+    .bss                                     0x2000a068   Section      100  ctr.o(.bss)
+    .bss                                     0x2000a0cc   Section       20  vibra.o(.bss)
+    STACK                                    0x2000a0e0   Section     1280  startup_stm32f103xe.o(STACK)
 
     Global Symbols
 
@@ -1250,58 +1251,61 @@ Image Symbol Table
     TIM_DMAError                             0x08001e31   Thumb Code    84  stm32f1xx_hal_tim.o(i.TIM_DMAError)
     TIM_ETR_SetConfig                        0x08001e85   Thumb Code    20  stm32f1xx_hal_tim.o(i.TIM_ETR_SetConfig)
     TIM_OC2_SetConfig                        0x08001f09   Thumb Code    98  stm32f1xx_hal_tim.o(i.TIM_OC2_SetConfig)
-    UsageFault_Handler                       0x08002073   Thumb Code     2  stm32f1xx_it.o(i.UsageFault_Handler)
-    Vibra_monitor                            0x08002075   Thumb Code    80  vibra.o(i.Vibra_monitor)
-    __scatterload_copy                       0x080020f1   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x080020ff   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08002101   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    boot_init                                0x08002111   Thumb Code    28  ctr.o(i.boot_init)
-    close_all                                0x08002131   Thumb Code    32  ctr.o(i.close_all)
-    control_template_bit                     0x08002151   Thumb Code    76  ws2812.o(i.control_template_bit)
-    control_template_buff                    0x080021a1   Thumb Code    18  ws2812.o(i.control_template_buff)
-    ctr_fan                                  0x080021b9   Thumb Code   392  ctr.o(i.ctr_fan)
-    draw_arrows                              0x0800234d   Thumb Code   176  ctr.o(i.draw_arrows)
-    fan_init                                 0x08002405   Thumb Code    38  ctr.o(i.fan_init)
-    fan_list_init                            0x08002439   Thumb Code    84  ctr.o(i.fan_list_init)
-    fan_logic                                0x08002491   Thumb Code   202  ctr.o(i.fan_logic)
-    led_circle_Init                          0x08002565   Thumb Code    32  ctr.o(i.led_circle_Init)
-    light_flow                               0x08002585   Thumb Code    30  ctr.o(i.light_flow)
-    light_on                                 0x080025a3   Thumb Code    60  ctr.o(i.light_on)
-    line_init                                0x080025df   Thumb Code    36  ctr.o(i.line_init)
-    main                                     0x08002605   Thumb Code    72  main.o(i.main)
-    vibra_init                               0x08002651   Thumb Code    22  vibra.o(i.vibra_init)
-    AHBPrescTable                            0x0800266c   Data          16  system_stm32f1xx_1.o(.constdata)
-    Region$$Table$$Base                      0x0800267c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800269c   Number         0  anon$$obj.o(Region$$Table)
+    Test                                     0x08002075   Thumb Code    72  ctr.o(i.Test)
+    UsageFault_Handler                       0x080020c5   Thumb Code     2  stm32f1xx_it.o(i.UsageFault_Handler)
+    Vibra_monitor                            0x080020c9   Thumb Code    76  vibra.o(i.Vibra_monitor)
+    __scatterload_copy                       0x08002141   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800214f   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x08002151   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    boot_init                                0x08002161   Thumb Code    28  ctr.o(i.boot_init)
+    close_all                                0x08002181   Thumb Code    32  ctr.o(i.close_all)
+    control_template_bit                     0x080021a1   Thumb Code    76  ws2812.o(i.control_template_bit)
+    control_template_buff                    0x080021f1   Thumb Code    18  ws2812.o(i.control_template_buff)
+    ctr_fan                                  0x08002209   Thumb Code   392  ctr.o(i.ctr_fan)
+    draw_arrows                              0x0800239d   Thumb Code   178  ctr.o(i.draw_arrows)
+    fan_init                                 0x08002459   Thumb Code    38  ctr.o(i.fan_init)
+    fan_list_init                            0x0800248d   Thumb Code    84  ctr.o(i.fan_list_init)
+    fan_logic                                0x080024e5   Thumb Code   202  ctr.o(i.fan_logic)
+    led_circle_Init                          0x080025b9   Thumb Code    32  ctr.o(i.led_circle_Init)
+    light_flow                               0x080025d9   Thumb Code    30  ctr.o(i.light_flow)
+    light_on                                 0x080025f7   Thumb Code    60  ctr.o(i.light_on)
+    line_init                                0x08002633   Thumb Code    36  ctr.o(i.line_init)
+    main                                     0x08002659   Thumb Code    86  main.o(i.main)
+    vibra_init                               0x080026b5   Thumb Code    22  vibra.o(i.vibra_init)
+    AHBPrescTable                            0x080026d0   Data          16  system_stm32f1xx_1.o(.constdata)
+    Region$$Table$$Base                      0x080026e0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08002700   Number         0  anon$$obj.o(Region$$Table)
     Step                                     0x20000000   Data           4  main.o(.data)
-    RGB1                                     0x20000004   Data           4  main.o(.data)
-    ESfanChannelList1                        0x20000008   Data           6  ws2812.o(.data)
-    ESfanTimList1                            0x20000010   Data          24  ws2812.o(.data)
-    flag_flow                                0x20000028   Data           4  ctr.o(.data)
-    ESfanChannelList                         0x2000002c   Data           6  ctr.o(.data)
-    arrows                                   0x20000032   Data          21  ctr.o(.data)
-    ESfanTimList                             0x20000048   Data          24  ctr.o(.data)
-    uwTickFreq                               0x20000060   Data           1  stm32f1xx_hal.o(.data)
-    uwTickPrio                               0x20000064   Data           4  stm32f1xx_hal.o(.data)
-    uwTick                                   0x20000068   Data           4  stm32f1xx_hal.o(.data)
-    SystemCoreClock                          0x2000006c   Data           4  system_stm32f1xx_1.o(.data)
-    htim1                                    0x20000070   Data          72  tim.o(.bss)
-    htim2                                    0x200000b8   Data          72  tim.o(.bss)
-    htim3                                    0x20000100   Data          72  tim.o(.bss)
-    htim4                                    0x20000148   Data          72  tim.o(.bss)
-    htim5                                    0x20000190   Data          72  tim.o(.bss)
-    htim8                                    0x200001d8   Data          72  tim.o(.bss)
-    hdma_tim1_ch1                            0x20000220   Data          68  tim.o(.bss)
-    hdma_tim2_ch1                            0x20000264   Data          68  tim.o(.bss)
-    hdma_tim3_ch4_up                         0x200002a8   Data          68  tim.o(.bss)
-    hdma_tim4_ch1                            0x200002ec   Data          68  tim.o(.bss)
-    hdma_tim5_ch1                            0x20000330   Data          68  tim.o(.bss)
-    hdma_tim8_ch3_up                         0x20000374   Data          68  tim.o(.bss)
-    WS2812B_Buf                              0x200003b8   Data        1604  ws2812.o(.bss)
-    WS2812B_Bit                              0x200009fc   Data       38500  ws2812.o(.bss)
-    ES                                       0x2000a060   Data         100  ctr.o(.bss)
-    vibra_flag                               0x2000a0c4   Data          20  vibra.o(.bss)
-    __initial_sp                             0x2000a5d8   Data           0  startup_stm32f103xe.o(STACK)
+    now_light                                0x20000004   Data           4  main.o(.data)
+    MODE                                     0x20000008   Data           4  main.o(.data)
+    RGB1                                     0x2000000c   Data           4  main.o(.data)
+    ESfanChannelList1                        0x20000010   Data           6  ws2812.o(.data)
+    ESfanTimList1                            0x20000018   Data          24  ws2812.o(.data)
+    flag_flow                                0x20000030   Data           4  ctr.o(.data)
+    ESfanChannelList                         0x20000034   Data           6  ctr.o(.data)
+    arrows                                   0x2000003a   Data          21  ctr.o(.data)
+    ESfanTimList                             0x20000050   Data          24  ctr.o(.data)
+    uwTickFreq                               0x20000068   Data           1  stm32f1xx_hal.o(.data)
+    uwTickPrio                               0x2000006c   Data           4  stm32f1xx_hal.o(.data)
+    uwTick                                   0x20000070   Data           4  stm32f1xx_hal.o(.data)
+    SystemCoreClock                          0x20000074   Data           4  system_stm32f1xx_1.o(.data)
+    htim1                                    0x20000078   Data          72  tim.o(.bss)
+    htim2                                    0x200000c0   Data          72  tim.o(.bss)
+    htim3                                    0x20000108   Data          72  tim.o(.bss)
+    htim4                                    0x20000150   Data          72  tim.o(.bss)
+    htim5                                    0x20000198   Data          72  tim.o(.bss)
+    htim8                                    0x200001e0   Data          72  tim.o(.bss)
+    hdma_tim1_ch1                            0x20000228   Data          68  tim.o(.bss)
+    hdma_tim2_ch1                            0x2000026c   Data          68  tim.o(.bss)
+    hdma_tim3_ch4_up                         0x200002b0   Data          68  tim.o(.bss)
+    hdma_tim4_ch1                            0x200002f4   Data          68  tim.o(.bss)
+    hdma_tim5_ch1                            0x20000338   Data          68  tim.o(.bss)
+    hdma_tim8_ch3_up                         0x2000037c   Data          68  tim.o(.bss)
+    WS2812B_Buf                              0x200003c0   Data        1604  ws2812.o(.bss)
+    WS2812B_Bit                              0x20000a04   Data       38500  ws2812.o(.bss)
+    ES                                       0x2000a068   Data         100  ctr.o(.bss)
+    vibra_flag                               0x2000a0cc   Data          20  vibra.o(.bss)
+    __initial_sp                             0x2000a5e0   Data           0  startup_stm32f103xe.o(STACK)
 
 
 
@@ -1311,9 +1315,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000131
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000270c, Max: 0x00040000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002778, Max: 0x00040000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000269c, Max: 0x00040000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002700, Max: 0x00040000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1410,47 +1414,50 @@ Memory Map of the image
     0x08001fdc   0x08001fdc   0x00000050   Code   RO          904    i.TIM_OC4_SetConfig  stm32f1xx_hal_tim.o
     0x0800202c   0x0800202c   0x00000022   Code   RO          906    i.TIM_TI1_ConfigInputStage  stm32f1xx_hal_tim.o
     0x0800204e   0x0800204e   0x00000024   Code   RO          908    i.TIM_TI2_ConfigInputStage  stm32f1xx_hal_tim.o
-    0x08002072   0x08002072   0x00000002   Code   RO          304    i.UsageFault_Handler  stm32f1xx_it.o
-    0x08002074   0x08002074   0x0000005c   Code   RO          720    i.Vibra_monitor     vibra.o
-    0x080020d0   0x080020d0   0x00000020   Code   RO         2254    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x080020f0   0x080020f0   0x0000000e   Code   RO         2820    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080020fe   0x080020fe   0x00000002   Code   RO         2821    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08002100   0x08002100   0x0000000e   Code   RO         2822    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x0800210e   0x0800210e   0x00000002   PAD
-    0x08002110   0x08002110   0x00000020   Code   RO          587    i.boot_init         ctr.o
-    0x08002130   0x08002130   0x00000020   Code   RO          588    i.close_all         ctr.o
-    0x08002150   0x08002150   0x00000050   Code   RO          461    i.control_template_bit  ws2812.o
-    0x080021a0   0x080021a0   0x00000018   Code   RO          456    i.control_template_buff  ws2812.o
-    0x080021b8   0x080021b8   0x00000194   Code   RO          589    i.ctr_fan           ctr.o
-    0x0800234c   0x0800234c   0x000000b8   Code   RO          590    i.draw_arrows       ctr.o
-    0x08002404   0x08002404   0x00000034   Code   RO          592    i.fan_init          ctr.o
-    0x08002438   0x08002438   0x00000058   Code   RO          593    i.fan_list_init     ctr.o
-    0x08002490   0x08002490   0x000000d4   Code   RO          594    i.fan_logic         ctr.o
-    0x08002564   0x08002564   0x00000020   Code   RO          595    i.led_circle_Init   ctr.o
-    0x08002584   0x08002584   0x0000001e   Code   RO          596    i.light_flow        ctr.o
-    0x080025a2   0x080025a2   0x0000003c   Code   RO          597    i.light_on          ctr.o
-    0x080025de   0x080025de   0x00000024   Code   RO          598    i.line_init         ctr.o
-    0x08002602   0x08002602   0x00000002   PAD
-    0x08002604   0x08002604   0x0000004c   Code   RO           15    i.main              main.o
-    0x08002650   0x08002650   0x0000001c   Code   RO          721    i.vibra_init        vibra.o
-    0x0800266c   0x0800266c   0x00000010   Data   RO         2743    .constdata          system_stm32f1xx_1.o
-    0x0800267c   0x0800267c   0x00000020   Data   RO         2818    Region$$Table       anon$$obj.o
+    0x08002072   0x08002072   0x00000002   PAD
+    0x08002074   0x08002074   0x00000050   Code   RO          586    i.Test              ctr.o
+    0x080020c4   0x080020c4   0x00000002   Code   RO          304    i.UsageFault_Handler  stm32f1xx_it.o
+    0x080020c6   0x080020c6   0x00000002   PAD
+    0x080020c8   0x080020c8   0x00000058   Code   RO          720    i.Vibra_monitor     vibra.o
+    0x08002120   0x08002120   0x00000020   Code   RO         2254    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
+    0x08002140   0x08002140   0x0000000e   Code   RO         2820    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800214e   0x0800214e   0x00000002   Code   RO         2821    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08002150   0x08002150   0x0000000e   Code   RO         2822    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800215e   0x0800215e   0x00000002   PAD
+    0x08002160   0x08002160   0x00000020   Code   RO          587    i.boot_init         ctr.o
+    0x08002180   0x08002180   0x00000020   Code   RO          588    i.close_all         ctr.o
+    0x080021a0   0x080021a0   0x00000050   Code   RO          461    i.control_template_bit  ws2812.o
+    0x080021f0   0x080021f0   0x00000018   Code   RO          456    i.control_template_buff  ws2812.o
+    0x08002208   0x08002208   0x00000194   Code   RO          589    i.ctr_fan           ctr.o
+    0x0800239c   0x0800239c   0x000000bc   Code   RO          590    i.draw_arrows       ctr.o
+    0x08002458   0x08002458   0x00000034   Code   RO          592    i.fan_init          ctr.o
+    0x0800248c   0x0800248c   0x00000058   Code   RO          593    i.fan_list_init     ctr.o
+    0x080024e4   0x080024e4   0x000000d4   Code   RO          594    i.fan_logic         ctr.o
+    0x080025b8   0x080025b8   0x00000020   Code   RO          595    i.led_circle_Init   ctr.o
+    0x080025d8   0x080025d8   0x0000001e   Code   RO          596    i.light_flow        ctr.o
+    0x080025f6   0x080025f6   0x0000003c   Code   RO          597    i.light_on          ctr.o
+    0x08002632   0x08002632   0x00000024   Code   RO          598    i.line_init         ctr.o
+    0x08002656   0x08002656   0x00000002   PAD
+    0x08002658   0x08002658   0x0000005c   Code   RO           15    i.main              main.o
+    0x080026b4   0x080026b4   0x0000001c   Code   RO          721    i.vibra_init        vibra.o
+    0x080026d0   0x080026d0   0x00000010   Data   RO         2743    .constdata          system_stm32f1xx_1.o
+    0x080026e0   0x080026e0   0x00000020   Data   RO         2818    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800269c, Size: 0x0000a5d8, Max: 0x0000c000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08002700, Size: 0x0000a5e0, Max: 0x0000c000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x0800269c   0x00000008   Data   RW           16    .data               main.o
-    0x20000008   0x080026a4   0x00000020   Data   RW          429    .data               ws2812.o
-    0x20000028   0x080026c4   0x00000038   Data   RW          604    .data               ctr.o
-    0x20000060   0x080026fc   0x0000000c   Data   RW         1791    .data               stm32f1xx_hal.o
-    0x2000006c   0x08002708   0x00000004   Data   RW         2745    .data               system_stm32f1xx_1.o
-    0x20000070        -       0x00000348   Zero   RW          221    .bss                tim.o
-    0x200003b8        -       0x00009ca8   Zero   RW          428    .bss                ws2812.o
-    0x2000a060        -       0x00000064   Zero   RW          600    .bss                ctr.o
-    0x2000a0c4        -       0x00000014   Zero   RW          722    .bss                vibra.o
-    0x2000a0d8        -       0x00000500   Zero   RW            1    STACK               startup_stm32f103xe.o
+    0x20000000   0x08002700   0x00000010   Data   RW           16    .data               main.o
+    0x20000010   0x08002710   0x00000020   Data   RW          429    .data               ws2812.o
+    0x20000030   0x08002730   0x00000038   Data   RW          604    .data               ctr.o
+    0x20000068   0x08002768   0x0000000c   Data   RW         1791    .data               stm32f1xx_hal.o
+    0x20000074   0x08002774   0x00000004   Data   RW         2745    .data               system_stm32f1xx_1.o
+    0x20000078        -       0x00000348   Zero   RW          221    .bss                tim.o
+    0x200003c0        -       0x00009ca8   Zero   RW          428    .bss                ws2812.o
+    0x2000a068        -       0x00000064   Zero   RW          600    .bss                ctr.o
+    0x2000a0cc        -       0x00000014   Zero   RW          722    .bss                vibra.o
+    0x2000a0e0        -       0x00000500   Zero   RW            1    STACK               startup_stm32f103xe.o
 
 
 ==============================================================================
@@ -1460,10 +1467,10 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1194         52          0         56        100       9925   ctr.o
+      1278         62          0         56        100      10504   ctr.o
        140          4          0          0          0        814   dma.o
        124         14          0          0          0        923   gpio.o
-       174          4          0          8          0     478924   main.o
+       190          6          0         16          0     478987   main.o
         36          8        304          0       1280        792   startup_stm32f103xe.o
        164         28          0         12          0       6433   stm32f1xx_hal.o
        198         14          0          0          0      28887   stm32f1xx_hal_cortex.o
@@ -1476,13 +1483,13 @@ Image component sizes
         92         36          0          0          0       6434   stm32f1xx_it.o
          2          0         16          4          0       1091   system_stm32f1xx_1.o
       1676        130          0          0        840       6779   tim.o
-       120         18          0          0         20       1539   vibra.o
+       116         18          0          0         20       1531   vibra.o
        220         20          0         32      40104       3227   ws2812.o
 
     ----------------------------------------------------------------------
-      9408        624        352        112      42344     576427   Object Totals
+      9508        636        352        120      42344     577061   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        16          0          0          0          0          0   (incl. Padding)
+        20          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1520,15 +1527,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      9532        640        352        112      42344     572283   Grand Totals
-      9532        640        352        112      42344     572283   ELF Image Totals
-      9532        640        352        112          0          0   ROM Totals
+      9632        652        352        120      42344     572865   Grand Totals
+      9632        652        352        120      42344     572865   ELF Image Totals
+      9632        652        352        120          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 9884 (   9.65kB)
-    Total RW  Size (RW Data + ZI Data)             42456 (  41.46kB)
-    Total ROM Size (Code + RO Data + RW Data)       9996 (   9.76kB)
+    Total RO  Size (Code + RO Data)                 9984 (   9.75kB)
+    Total RW  Size (RW Data + ZI Data)             42464 (  41.47kB)
+    Total ROM Size (Code + RO Data + RW Data)      10104 (   9.87kB)
 
 ==============================================================================
 

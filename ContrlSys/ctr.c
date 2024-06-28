@@ -226,8 +226,8 @@ void fan_logic(uint8_t s)
   {
     return;
   }
-  uint8_t rand_num_use = 0, use_num = ES.timeStamp % 5 + 1; // È·±£¿Ï¶¨²»ÊÇ0
-  // TODO:¸Ä»ØÀ´
+  uint8_t rand_num_use = 0, use_num = ES.timeStamp % 5 + 1; // È·ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½0
+  // TODO:ï¿½Ä»ï¿½ï¿½ï¿½
    while (use_num--)
      rand_num_use = ES.fan[rand_num_use].next;
    del_list(rand_num_use);
@@ -236,7 +236,7 @@ void fan_logic(uint8_t s)
   //    ES.last_mode_timeStamp = ES.timeStamp;
   //    ES.status_same=1;
   // return;
-  //  } // Ö±½ÓÖØÆô
+  //  } // Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   if (!ES.no_first_hid)
   {
     ES.no_first_hid = 1;
@@ -266,12 +266,13 @@ void light_flow(uint8_t s, uint32_t RGB, uint8_t flag)
   control_template_bit(0, WS2812B_LED_QUANTITY, 0x800000);
 }
 
-void Test(int s, int RGB)
+void Test(int s, int RGB,int now_light)
 {
   control_template_buff(0, WS2812B_LED_QUANTITY + OUTER, RGB);
   control_template_bit(0, WS2812B_LED_QUANTITY + OUTER, 0x800000);
-  for (uint8_t i = 0; i < 5; i++)
+  for (int i = 0; i < 5; i++)
   {
+    if(i!=now_light) continue;
     HAL_TIM_PWM_Start_DMA(ESfanTimList[i], ESfanChannelList[i], &WS2812B_Bit[0],
                           24 * All_Number + 1);
   }
@@ -288,8 +289,8 @@ void draw_arrows(uint8_t flag, uint8_t Step, uint32_t Color)
   uint8_t number = 0;
   uint16_t location1 = 0, location2 = 0;
   uint32_t new1 = 0;
-  // Æß¸öÁ÷Ë®µÆ
-  // Á÷Ë®µÆ°µÒ»µãÒ²¿ÉÒÔ
+  // ï¿½ß¸ï¿½ï¿½ï¿½Ë®ï¿½ï¿½
+  // ï¿½ï¿½Ë®ï¿½Æ°ï¿½Ò»ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½
   // 0111110
   // 1011101
   // 1101011
@@ -309,7 +310,7 @@ void draw_arrows(uint8_t flag, uint8_t Step, uint32_t Color)
     {
       if (i < 3)
       {
-        for (uint8_t j = 0; j <= i - 1; j++)
+        for (uint8_t j = 0; j <= i-2; j++)// i -> i-1
         {
           // location1 = j + i * 7 + Step * 7 + (uint16_t) station * 7;
           location1 = j + i * 7 + Step * 7 + (uint16_t)station * 7;
@@ -330,8 +331,8 @@ void draw_arrows(uint8_t flag, uint8_t Step, uint32_t Color)
           {
             new1 = new1 - 238;
           }
-          if (i == 3 && k == 2)
-            continue;
+           if (i == 3 && k == 2)
+             continue;
           WS2812B_Buf[new1] = Color;
         }
       }

@@ -34,7 +34,7 @@ void Vibra_monitor(void)
 	if(HAL_GPIO_ReadPin(VB2_GPIO_Port,VB2_Pin) == SET){
 		vibra_flag[3]=1;
 	}
-	if(HAL_GPIO_ReadPin(VB3_GPIO_Port,VB3_Pin) == SET){
+	if(HAL_GPIO_ReadPin(VB3_GPIO_Port,VB3_Pin) == SET||1){
 		vibra_flag[1]=1;
 	}
 	if(HAL_GPIO_ReadPin(VB4_GPIO_Port,VB4_Pin) == SET){

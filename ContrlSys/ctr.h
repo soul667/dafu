@@ -72,7 +72,7 @@ void fan_logic(uint8_t s);
 void fan_list_init();
 void fan_light(uint8_t flag,uint8_t light_num);
 inline void del_list(uint8_t num);
-void Test(int s,int RGB);
+void Test(int s,int RGB,int now_light);
 
 //inline uint8_t rand_num(uint8_t s);
 void boot_init();
